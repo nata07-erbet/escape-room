@@ -1,9 +1,21 @@
+import { TQuest } from '../../types/types';
+
 import { Card } from '../card/card';
 
-function CardsList() {
+type TCardsList ={
+  quests: TQuest[];
+}
+
+function CardsList({ quests }: TCardsList) {
   return(
+
     <div className="cards-grid">
-      <Card />
+      {quests.map((quest) => (
+        <Card
+          quest={quest}
+          key={quest.id}
+        />
+      ))}
     </div>
   );
 }

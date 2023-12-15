@@ -1,4 +1,12 @@
-function Card() {
+import { TQuest } from '../../types/types';
+
+type TCard ={
+  quest: TQuest;
+}
+
+function Card({ quest }: TCard) {
+  // const { id, title,  previewImg,  previewImgWebp, level, type, peopleMinMax} = quest;
+
   return (
     <div className="quest-card">
       <div className="quest-card__img">
