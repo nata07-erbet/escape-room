@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 
+const isAuthorizated = false;
+
 function Header() {
   return(
     <header className="header">
@@ -32,23 +34,37 @@ function Header() {
             Контакты
               </NavLink>
             </li>
-            <li className="main-nav__item">
-              <NavLink
-                className="link"
-                to={AppRoute.MyQuests}
-              >
-            Мои бронирования
-              </NavLink>
-            </li>
+            {isAuthorizated && (
+              <li className="main-nav__item">
+                <NavLink
+                  className="link"
+                  to={AppRoute.MyQuests}
+                >
+             Мои бронирования
+                </NavLink>
+              </li>
+            )}
+
           </ul>
         </nav>
         <div className="header__side-nav">
-          <NavLink
-            className="btn btn--accent header__side-item"
-            to={AppRoute.Main}
-          >
-        Выйти
-          </NavLink>
+          {isAuthorizated
+            ? (
+              <NavLink
+                className="btn btn--accent header__side-item"
+                to={AppRoute.Main}
+              >
+              Выйти
+              </NavLink>)
+            : (
+              <NavLink
+                className="btn header__side-item header__login-btn"
+                to={AppRoute.Login}
+              >
+                Вход
+              </NavLink>
+            )}
+
           <NavLink
             className="link header__side-item header__phone-link"
             to="#"
