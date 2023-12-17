@@ -58,10 +58,6 @@ const router = createBrowserRouter([
   }
 ]);
 
-// <Contacts />
-// <Booking />
-// <MyQuests />
-
 
 export default function App() {
   return <RouterProvider router={router} />;
