@@ -14,4 +14,21 @@ const COMPLICATION = [
   'Сложный',
 ] as const;
 
-export { TOPICS, COMPLICATION };
+
+enum AppRoute {
+  Main = '/',
+  Quest = '/quest',
+  MyQuests = '/my-quests',
+  Login = '/login',
+  Booking ='/booking',
+  Reservation ='/reservation',
+  Contacts ='/contacts',
+}
+
+const enum AuthorizationStatus {
+  Auth= 'AUTH',
+  NoAuth= 'NO_AUTH',
+  UnKnown= 'UNKNOWN',
+}
+
+export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus };
