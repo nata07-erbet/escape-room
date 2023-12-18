@@ -7,6 +7,22 @@ const TOPICS = [
   'Sci-fi',
 ] as const;
 
+const TopicMap = {
+  allQuests: 'Все квесты',
+  adventure:'Приключения',
+  horror: 'Ужасы',
+  mystic: 'Мистика',
+  detective: 'Детектив',
+  sciFi: 'Sci-fi',
+};
+
+const ComplicationMap = {
+  Any: 'Любой',
+  Easy: 'Лёгкий',
+  Middle: 'Средний',
+  Hard: 'Сложный'
+};
+
 const COMPLICATION = [
   'Любой',
   'Лёгкий',
@@ -31,4 +47,4 @@ const enum AuthorizationStatus {
   UnKnown= 'UNKNOWN',
 }
 
-export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus };
+export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus, TopicMap, ComplicationMap };
