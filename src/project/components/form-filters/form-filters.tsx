@@ -1,8 +1,13 @@
+import { useState } from 'react';
+
 import { ComplicationMap, TopicMap} from '../../const/const';
 const defaultTopicInput = TopicMap.allQuests;
 const defaultComplicationInput = ComplicationMap.Any;
 
 function FormFilters() {
+  const [filterTopic, setFilterTopic] = useState(defaultTopicInput);
+  const [filterComplication, setFilterComplication] = useState(defaultComplicationInput);
+
   return(
     <form className="filter" action="#" method="get">
       <fieldset className="filter__section">
@@ -18,7 +23,7 @@ function FormFilters() {
                   type="radio"
                   name="type"
                   id={key}
-                  checked = {value === defaultTopicInput}
+                  checked = {value === filterTopic}
                 />
                 <label className="filter__label" htmlFor={key}>
                   <svg className="filter__icon" width={26} height={30} aria-hidden="true">
@@ -45,7 +50,7 @@ function FormFilters() {
                   type="radio"
                   name="level"
                   id="any"
-                  checked = {value === defaultComplicationInput}
+                  checked = {value === filterComplication}
                 />
                 <label className="filter__label" htmlFor="any">
                   <span className="filter__label-text">{value}</span>

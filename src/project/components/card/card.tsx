@@ -23,7 +23,7 @@ function Card({ quest }: TCard) {
             srcSet="img/content/crypt/crypt-size-s@2x.jpg 2x"
             width={344}
             height={232}
-            alt="Мужчина в клетке в подземелье."
+            alt={title}
           />
         </picture>
       </div>
@@ -38,7 +38,7 @@ function Card({ quest }: TCard) {
             <svg width={11} height={14} aria-hidden="true">
               <use xlinkHref="#icon-person" />
             </svg>
-            {peopleMinMax}&nbsp;чел
+            {`${peopleMinMax[0]}-${peopleMinMax[1]}`}&nbsp;чел
           </li>
           <li className="tags__item">
             <svg width={14} height={14} aria-hidden="true">
@@ -51,7 +51,6 @@ function Card({ quest }: TCard) {
     </div>
 
   );
-
 }
 
 export { Card };

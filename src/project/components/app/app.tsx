@@ -33,7 +33,7 @@ const router = createBrowserRouter([
   {
     path: AppRoute.Booking,
     element:
-      <ProtectedRoute user={AuthorizationStatus.Auth}>
+      <ProtectedRoute user={AuthorizationStatus.NoAuth}>
         <Booking />
       </ProtectedRoute>
 
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
   {
     path: AppRoute.MyQuests,
     element:
-     <ProtectedRoute user={AuthorizationStatus.Auth}>
+     <ProtectedRoute user={AuthorizationStatus.NoAuth}>
        <MyQuests />
      </ProtectedRoute>
   },
