@@ -1,11 +1,14 @@
+import { NavLink } from 'react-router-dom';
+
 import { TQuest } from '../../types/types';
+import { AppRoute } from '../../const/const';
 
 type TCard ={
   quest: TQuest;
 }
 
 function Card({ quest }: TCard) {
-  const { title, level, previewImg, peopleMinMax} = quest;
+  const {id, title, level, previewImg, peopleMinMax} = quest;
 
   return (
     <div className="quest-card">
@@ -26,9 +29,9 @@ function Card({ quest }: TCard) {
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <a className="quest-card__link" href="quest.html">
+          <NavLink className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>
             {title}
-          </a>
+          </NavLink>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">

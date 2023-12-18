@@ -9,8 +9,8 @@ type TProtectedRoute = {
 function ProtectedRoute({user, children}: TProtectedRoute): JSX.Element {
   return (
     user === AuthorizationStatus.Auth
-      ? <Navigate to={AppRoute.Login} />
-      : children
+      ? children
+      : <Navigate to={AppRoute.Login} />
   );
 
 }

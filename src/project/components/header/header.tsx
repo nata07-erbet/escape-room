@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 
-const isAuthorizated = false;
+const isAuthorizated = true;
 
 function Header() {
   return(

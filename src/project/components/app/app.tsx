@@ -10,8 +10,8 @@ import { Booking } from '../../pages/booking/booking';
 import { MyQuests } from '../../pages/my-quests/my-quests';
 import { NotFondPage } from '../../pages/404/404';
 
-
 import { AppRoute, AuthorizationStatus } from '../../const/const';
+
 
 const router = createBrowserRouter([
   {
@@ -31,25 +31,19 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    children:[
-      {
-        element:  <Booking />,
-        index: true //?
-      },
-    ],
     path: AppRoute.Booking,
-    element:<ProtectedRoute user={AuthorizationStatus.Auth} />
+    element:
+      <ProtectedRoute user={AuthorizationStatus.Auth}>
+        <Booking />
+      </ProtectedRoute>
 
   },
   {
-    children:[
-      {
-        element: <MyQuests />,
-        index: true //?
-      },
-    ],
     path: AppRoute.MyQuests,
-    element: <ProtectedRoute user={AuthorizationStatus.Auth} />
+    element:
+     <ProtectedRoute user={AuthorizationStatus.Auth}>
+       <MyQuests />
+     </ProtectedRoute>
   },
 
   {
