@@ -9,4 +9,10 @@ type TQuest = {
   peopleMinMax: number[];
 }
 
-export type { TQuest };
+type TQuestFull = TQuest & {
+  description: string;
+coverImg: string;
+coverImgWebp: string;
+}
+
+export type { TQuest, TQuestFull };

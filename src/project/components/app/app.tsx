@@ -9,6 +9,8 @@ import { Login } from '../../pages/login/login';
 import { Booking } from '../../pages/booking/booking';
 import { MyQuests } from '../../pages/my-quests/my-quests';
 import { NotFondPage } from '../../pages/404/404';
+import { mocks } from '../../mocks/mocks';
+import { mock } from '../../mocks/mocks';
 
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
@@ -16,15 +18,15 @@ import { AppRoute, AuthorizationStatus } from '../../const/const';
 const router = createBrowserRouter([
   {
     path: AppRoute.Main,
-    element: <Catalog />,
+    element: <Catalog quests={ mocks } />,
   },
   {
     path: AppRoute.Contacts,
     element: <Contacts />
   },
   {
-    path: AppRoute.Quest,
-    element: < Quest/>
+    path: `${AppRoute.Quest}/:questId`,
+    element: < Quest quest={ mock }/>
   },
   {
     path: AppRoute.Login,

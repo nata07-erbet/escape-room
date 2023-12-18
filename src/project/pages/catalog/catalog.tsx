@@ -2,9 +2,13 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { CardsList } from '../../components/cards-list/cards-list';
 import { FormFilters } from '../../components/form-filters/form-filters';
-import { mocks } from '../../mocks/mocks';
+import { TQuest } from '../../types/types';
 
-function Catalog() {
+type CatalogProps ={
+  quests: TQuest[];
+}
+
+function Catalog({quests}: CatalogProps) {
   return(
     <>
       <Header />
@@ -22,7 +26,7 @@ function Catalog() {
             <FormFilters />
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
-          <CardsList quests={ mocks} />
+          <CardsList quests={ quests } />
         </div>
       </main>
       <Footer />

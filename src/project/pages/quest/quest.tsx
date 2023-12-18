@@ -1,7 +1,17 @@
+import { Link } from 'react-router-dom';
+
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { TQuestFull } from '../../types/types';
+import { AppRoute } from '../../const/const';
 
-function Quest() {
+type QuestProp = {
+  quest: TQuestFull;
+};
+
+function Quest({ quest }: QuestProp) {
+  const { title, type, peopleMinMax, level, description, coverImg } = quest;
+
   return (
     <>
       <Header />
@@ -13,51 +23,45 @@ function Quest() {
               srcSet="img/content/maniac/maniac-size-m.webp, img/content/maniac/maniac-size-m@2x.webp 2x"
             />
             <img
-              src="img/content/maniac/maniac-size-m.jpg"
+              src={coverImg}
               srcSet="img/content/maniac/maniac-size-m@2x.jpg 2x"
               width={1366}
               height={768}
-              alt=""
+              alt={title}
             />
           </picture>
         </div>
         <div className="container container--size-l">
           <div className="quest-page__content">
             <h1 className="title title--size-l title--uppercase quest-page__title">
-            Маньяк
+              {title}
             </h1>
             <p className="subtitle quest-page__subtitle">
-              <span className="visually-hidden">Жанр:</span>Ужасы
+              <span className="visually-hidden">Жанр:</span>{type}
             </p>
             <ul className="tags tags--size-l quest-page__tags">
               <li className="tags__item">
                 <svg width={11} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-person" />
                 </svg>
-              3–6&nbsp;чел
+                {peopleMinMax[0]}–{peopleMinMax[1]}&nbsp;чел
               </li>
               <li className="tags__item">
                 <svg width={14} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-level" />
                 </svg>
-              Средний
+                {level}
               </li>
             </ul>
             <p className="quest-page__description">
-            В&nbsp;комнате с&nbsp;приглушённым светом несколько человек, незнакомых
-            друг с&nbsp;другом, приходят в&nbsp;себя. Никто не&nbsp;помнит, что
-            произошло прошлым вечером. Руки и&nbsp;ноги связаны, но&nbsp;одному
-            из&nbsp;вас получилось освободиться. На&nbsp;стене висит пугающий таймер
-            и&nbsp;запущен отсчёт 60&nbsp;минут. Сможете&nbsp;ли вы&nbsp;разобраться
-            в&nbsp;стрессовой ситуации, помочь другим, разобраться что произошло
-            и&nbsp;выбраться из&nbsp;комнаты?
+              {description}
             </p>
-            <a
+            <Link
               className="btn btn--accent btn--cta quest-page__btn"
-              href="booking.html"
+              to={`${AppRoute.Quest}/:questId/${AppRoute.Booking}`}
             >
             Забронировать
-            </a>
+            </Link>
           </div>
         </div>
       </main>

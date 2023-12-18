@@ -49,7 +49,6 @@ function Card({ quest }: TCard) {
         </ul>
       </div>
     </div>
-
   );
 }
 
