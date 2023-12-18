@@ -30,12 +30,22 @@ const router = createBrowserRouter([
   },
   {
     path: AppRoute.Login,
-    element: <Login />
+    element:
+    <ProtectedRoute
+      restrictedFor={AuthorizationStatus.Auth}
+      redirectTo={AppRoute.Main}
+    >
+      <Login />
+    </ProtectedRoute>
+
   },
   {
     path: AppRoute.Booking,
     element:
-      <ProtectedRoute user={AuthorizationStatus.NoAuth}>
+      <ProtectedRoute
+        restrictedFor={AuthorizationStatus.NoAuth}
+        redirectTo={AppRoute.Login}
+      >
         <Booking />
       </ProtectedRoute>
 
@@ -43,9 +53,12 @@ const router = createBrowserRouter([
   {
     path: AppRoute.MyQuests,
     element:
-     <ProtectedRoute user={AuthorizationStatus.NoAuth}>
-       <MyQuests />
-     </ProtectedRoute>
+    <ProtectedRoute
+      restrictedFor={AuthorizationStatus.NoAuth}
+      redirectTo={AppRoute.Login}
+    >
+      <MyQuests />
+    </ProtectedRoute>
   },
 
   {

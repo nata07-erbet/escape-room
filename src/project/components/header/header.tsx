@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
+import { getIsAuthorizated } from '../../mocks/auth';
 
-const isAuthorizated = true;
+const isAuthorizated = getIsAuthorizated;
 
 function Header() {
   return(
@@ -48,7 +49,7 @@ function Header() {
           </ul>
         </nav>
         <div className="header__side-nav">
-          {isAuthorizated
+          {isAuthorizated()
             ? (
               <NavLink
                 className="btn btn--accent header__side-item"

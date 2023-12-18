@@ -1,7 +1,23 @@
+import { useForm} from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 
+interface FormInputs {
+  email: string;
+}
+
 function Login() {
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<FormInputs>();
+
+  const onSubmit = (data: FormInputs) => console.log(data);
+
   return (
     <div className="wrapper">
       <Header />
@@ -27,6 +43,7 @@ function Login() {
               className="login-form"
               action="https://echo.htmlacademy.ru/"
               method="post"
+              onSubmit={handleSubmit(onSubmit)} // не уходит 
             >
               <div className="login-form__inner-wrapper">
                 <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -38,9 +55,20 @@ function Login() {
                     <input
                       type="email"
                       id="email"
-                      name="email"
                       placeholder="Адрес электронной почты"
-                      required="required"
+                      required
+                      {...register('email', {
+                        required: true,
+                        pattern: {
+                          value: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
+                          message: 'Error mail'
+                        }
+                      })}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name='email'
+                      render={({ message }) => <p>{message}</p>}
                     />
                   </div>
                   <div className="custom-input login-form__input">
@@ -50,15 +78,18 @@ function Login() {
                     <input
                       type="password"
                       id="password"
-                      name="password"
                       placeholder="Пароль"
-                      required="required"
+                      required
+                      {...register('singleErrorInput', { required: true, minLength:3, maxLength:15,
+                        pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/i // не прошло
+                      })}
                     />
                   </div>
                 </div>
                 <button
                   className="btn btn--accent btn--general login-form__submit"
                   type="submit"
+                  onSubmit={handleSubmit(onSubmit)}
                 >
               Войти
                 </button>
@@ -68,7 +99,7 @@ function Login() {
                   type="checkbox"
                   id="id-order-agreement"
                   name="user-agreement"
-                  required=""
+                  required
                 />
                 <span className="custom-checkbox__icon">
                   <svg width={20} height={17} aria-hidden="true">
