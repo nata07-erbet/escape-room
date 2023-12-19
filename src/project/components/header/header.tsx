@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../const/const';
-import { getIsAuthorizated } from '../../mocks/auth';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { mockAuthStatus } from '../../mocks/auth';
 
-const isAuthorizated = getIsAuthorizated;
+// const authorizationStatus = mockAuthStatus();
+const authorizationStatus = AuthorizationStatus.Auth;
 
 function Header() {
   return(
@@ -35,21 +36,23 @@ function Header() {
             Контакты
               </NavLink>
             </li>
-            {isAuthorizated && (
-              <li className="main-nav__item">
-                <NavLink
-                  className="link"
-                  to={AppRoute.MyQuests}
-                >
+            {authorizationStatus === AuthorizationStatus.Auth
+              ? (
+                <li className="main-nav__item">
+                  <NavLink
+                    className="link"
+                    to={AppRoute.MyQuests}
+                  >
              Мои бронирования
-                </NavLink>
-              </li>
-            )}
+                  </NavLink>
+                </li>
+              )
+              : ''}
 
           </ul>
         </nav>
         <div className="header__side-nav">
-          {isAuthorizated()
+          {authorizationStatus === AuthorizationStatus.Auth
             ? (
               <NavLink
                 className="btn btn--accent header__side-item"
@@ -77,6 +80,5 @@ function Header() {
     </header>
   );
 }
-
 
 export { Header };

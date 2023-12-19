@@ -9,12 +9,13 @@ type TProtectedRoute = {
 };
 
 function ProtectedRoute({restrictedFor, redirectTo, children}: TProtectedRoute): JSX.Element {
-  const authorizationStatus = mockAuthStatus();
+  // const authorizationStatus = mockAuthStatus();
+  const authorizationStatus = AuthorizationStatus.Auth;
 
   return (
     restrictedFor.includes(authorizationStatus) //пояснить
-      ? (<Navigate to={redirectTo} />)
-      : (children)
+      ? (children)
+      : (<Navigate to={redirectTo} />)
   );
 }
 

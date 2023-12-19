@@ -27,12 +27,38 @@ const getFullMock = () => (
     coverImgWebp: faker.image.urlLoremFlickr({ category: 'nature' })
   }
 );
+const getLocation = () => (
+  {
+    adress: faker.location.streetAddress(),
+    coords: [faker.location.latitude(), faker.location.longitude()]
+  }
+);
+
+const getSchedule = () => (
+  {
+    time: faker.date.anytime(),
+    isAvailable: faker.datatype.boolean(),
+  }
+);
+
+const getBookingQuest = () => (
+  {
+    id: faker.string.uuid(),
+    location: getLocation(),
+    slots: {
+      today: Array.from({length: faker.number.int({ min: 1, max: 3})}, () => getSchedule()),
+      tomorrow: Array.from({length: faker.number.int({ min: 1, max: 3 })}, () => getSchedule()),
+    }
+  }
+);
 
 const getMocks = () => Array.from({length: CARDS_COUNT}, () => getMock());
 
 const mock = getFullMock();
 const mocks = getMocks();
 
-export {mock, mocks, CARDS_COUNT};
+const place = Array.from({length:1}, () => getBookingQuest());
+
+export {mock, mocks,place, CARDS_COUNT};
 
 

@@ -7,6 +7,7 @@ import { AppRoute } from '../../const/const';
 
 type QuestProp = {
   quest: TQuestFull;
+
 };
 
 function Quest({ quest }: QuestProp) {
@@ -20,11 +21,11 @@ function Quest({ quest }: QuestProp) {
           <picture>
             <source
               type="image/webp"
-              srcSet="img/content/maniac/maniac-size-m.webp, img/content/maniac/maniac-size-m@2x.webp 2x"
+              srcSet={coverImg}
             />
             <img
               src={coverImg}
-              srcSet="img/content/maniac/maniac-size-m@2x.jpg 2x"
+              srcSet={coverImg}
               width={1366}
               height={768}
               alt={title}
@@ -58,7 +59,7 @@ function Quest({ quest }: QuestProp) {
             </p>
             <Link
               className="btn btn--accent btn--cta quest-page__btn"
-              to={`${AppRoute.Quest}/:questId/${AppRoute.Booking}`}
+              to={AppRoute.Booking} //вот тут точно косяк
             >
             Забронировать
             </Link>

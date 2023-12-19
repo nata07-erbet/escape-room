@@ -43,7 +43,7 @@ function Login() {
               className="login-form"
               action="https://echo.htmlacademy.ru/"
               method="post"
-              onSubmit={handleSubmit(onSubmit)} // не уходит 
+              onSubmit={handleSubmit(onSubmit)} // не уходит
             >
               <div className="login-form__inner-wrapper">
                 <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -60,8 +60,8 @@ function Login() {
                       {...register('email', {
                         required: true,
                         pattern: {
-                          value: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
-                          message: 'Error mail'
+                          value: /^([A-Za-z0-9_\-.])+\\@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/,
+                          message: 'Error mail' //нет сообщения об ошибках
                         }
                       })}
                     />

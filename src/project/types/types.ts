@@ -15,4 +15,23 @@ coverImg: string;
 coverImgWebp: string;
 }
 
-export type { TQuest, TQuestFull };
+type TLocation = {
+  address: string;
+  coords: [number];
+  };
+
+type TSchedule = {
+  time: string;
+  isAvailable: boolean;
+};
+
+type TBookingQuest ={
+    id: string;
+    location: TLocation;
+    slots: {
+      today: TSchedule[];
+      tomorrow: TSchedule[];
+  };
+};
+
+export type { TQuest, TQuestFull, TBookingQuest };
