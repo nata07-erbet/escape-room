@@ -9,7 +9,7 @@ import { Login } from '../../pages/login/login';
 import { Booking } from '../../pages/booking/booking';
 import { MyQuests } from '../../pages/my-quests/my-quests';
 import { NotFondPage } from '../../pages/404/404';
-import { mocks, mock} from '../../mocks/mocks';
+import { mocks, mock, place } from '../../mocks/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
 
@@ -38,14 +38,13 @@ const router = createBrowserRouter([
 
   },
   {
-    // path: `${AppRoute.Quest}/:questId/${AppRoute.Booking}`, //404 ?
-    path: AppRoute.Booking, //тоже  404
+    path: AppRoute.Booking,
     element:
       <ProtectedRoute
         restrictedFor={AuthorizationStatus.NoAuth}
         redirectTo={AppRoute.Login}
       >
-        <Booking />
+        <Booking quest={ mock } place={ place }/>
       </ProtectedRoute>
 
   },

@@ -29,14 +29,14 @@ const getFullMock = () => (
 );
 const getLocation = () => (
   {
-    adress: faker.location.streetAddress(),
+    address: faker.location.streetAddress(),
     coords: [faker.location.latitude(), faker.location.longitude()]
   }
 );
 
 const getSchedule = () => (
   {
-    time: faker.date.anytime(),
+    time: new Date().getDate() + faker.number.int({ min: 0, max: 3 }) ,
     isAvailable: faker.datatype.boolean(),
   }
 );
@@ -46,8 +46,8 @@ const getBookingQuest = () => (
     id: faker.string.uuid(),
     location: getLocation(),
     slots: {
-      today: Array.from({length: faker.number.int({ min: 1, max: 3})}, () => getSchedule()),
-      tomorrow: Array.from({length: faker.number.int({ min: 1, max: 3 })}, () => getSchedule()),
+      today: Array.from({length: faker.number.int({ min: 1, max: 5})}, () => getSchedule()),
+      tomorrow: Array.from({length: faker.number.int({ min: 1, max: 5 })}, () => getSchedule()),
     }
   }
 );

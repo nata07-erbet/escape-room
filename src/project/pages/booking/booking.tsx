@@ -1,7 +1,18 @@
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { TBookingQuest } from '../../types/types';
+import { TQuestFull } from '../../types/types';
 
-function Booking () {
+type BookingProps ={
+  place: TBookingQuest[];
+  quest: TQuestFull;
+}
+
+function Booking ({ place, quest }: BookingProps) {
+  const { title } = quest;
+  const { location, slots} = place[0];
+  const { today , tomorrow } = slots;
+
   return (
     <div className="wrapper">
       <Header />
@@ -27,7 +38,7 @@ function Booking () {
         Бронирование квеста
             </h1>
             <p className="title title--size-m title--uppercase page-content__title">
-        Маньяк
+              {title}
             </p>
           </div>
           <div className="page-content__item">
@@ -35,9 +46,9 @@ function Booking () {
               <div className="map">
                 <div className="map__container" />
               </div>
+
               <p className="booking-map__address">
-          Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м.
-          Петроградская
+                {location.address}
               </p>
             </div>
           </div>
@@ -51,118 +62,43 @@ function Booking () {
               <fieldset className="booking-form__date-section">
                 <legend className="booking-form__date-title">Сегодня</legend>
                 <div className="booking-form__date-inner-wrapper">
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today9h45m"
-                      name="date"
-                      required
-                      defaultValue="today9h45m"
-                    />
-                    <span className="custom-radio__label">9:45</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today15h00m"
-                      name="date"
-                      defaultChecked
-                      required
-                      defaultValue="today15h00m"
-                    />
-                    <span className="custom-radio__label">15:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today17h30m"
-                      name="date"
-                      required
-                      defaultValue="today17h30m"
-                    />
-                    <span className="custom-radio__label">17:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today19h30m"
-                      name="date"
-                      required
-                      defaultValue="today19h30m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">19:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="today21h30m"
-                      name="date"
-                      required
-                      defaultValue="today21h30m"
-                    />
-                    <span className="custom-radio__label">21:30</span>
-                  </label>
+                  {today.map((item) =>(
+
+                    <label className="custom-radio booking-form__date" key={item.time}>
+                      <input
+                        type="radio"
+                        id={item.time}
+                        name="date"
+                        required
+                        value={item.time}
+                        disabled={item.isAvailable}
+                      />
+                      <span className="custom-radio__label">{item.time}</span>
+                    </label>
+                  ))}
                 </div>
               </fieldset>
+
               <fieldset className="booking-form__date-section">
                 <legend className="booking-form__date-title">Завтра</legend>
                 <div className="booking-form__date-inner-wrapper">
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow11h00m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow11h00m"
-                    />
-                    <span className="custom-radio__label">11:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow15h00m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow15h00m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">15:00</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow17h30m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow17h30m"
-                      disabled
-                    />
-                    <span className="custom-radio__label">17:30</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow19h45m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow19h45m"
-                    />
-                    <span className="custom-radio__label">19:45</span>
-                  </label>
-                  <label className="custom-radio booking-form__date">
-                    <input
-                      type="radio"
-                      id="tomorrow21h30m"
-                      name="date"
-                      required
-                      defaultValue="tomorrow21h30m"
-                    />
-                    <span className="custom-radio__label">21:30</span>
-                  </label>
+                  {tomorrow.map((item) => (
+                    <label className="custom-radio booking-form__date" key={item.time}>
+                      <input
+                        type="radio"
+                        id={item.time}
+                        name="date"
+                        required
+                        value={item.time}
+                        disabled={item.isAvailable}
+                      />
+                      <span className="custom-radio__label">{item.time}</span>
+                    </label>
+                  ))}
                 </div>
               </fieldset>
             </fieldset>
+
             <fieldset className="booking-form__section">
               <legend className="visually-hidden">Контактная информация</legend>
               <div className="custom-input booking-form__input">
