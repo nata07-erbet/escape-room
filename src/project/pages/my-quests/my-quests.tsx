@@ -7,7 +7,6 @@ type MyQuestsProps = {
 };
 
 function MyQuests({ quests }: MyQuestsProps) {
-
   return(
     <div className="wrapper">
       <Header />
@@ -78,6 +77,7 @@ function MyQuests({ quests }: MyQuestsProps) {
                   <button
                     className="btn btn--accent btn--secondary quest-card__btn"
                     type="button"
+                    onClick={handleBookingDelete}
                   >
                      Отменить
                   </button>

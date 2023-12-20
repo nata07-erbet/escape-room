@@ -54,6 +54,19 @@ const getBookingQuest = () => (
 
 const getMocks = () => Array.from({length: CARDS_COUNT}, () => getMock());
 
+//Бронирование квеста
+const getPostBookingQuest = () => (
+  {
+    date:() => faker.datatype.boolean() ? 'today' : 'tomorrow',
+    time: new Date().getDate() + faker.number.int({ min: 0, max: 3 }),
+    contactPerson: faker.lorem.word(),
+    phone: faker.number.int({ min: 89154, max: 89999 }),
+    withChildren: faker.datatype.boolean(),
+    peopleCount: faker.number.int({ min: 1, max: 5 }),
+    placeId: faker.location.streetAddress()
+  }
+);
+
 const getResponseBookedQuest = () => (
   {
     date:() => faker.datatype.boolean() ? 'today' : 'tomorrow',
@@ -80,6 +93,10 @@ const getResponseBookedQuest = () => (
   }
 );
 
+//Бронирование квеста
+const bookingQuest = getPostBookingQuest();
+
+//Получение информации о бронированиях пользователя
 const bookingQuests = Array.from(({length: faker.number.int({ min: 1, max: 5 })}), () => getResponseBookedQuest());
 
 const mock = getFullMock();
@@ -87,6 +104,6 @@ const mocks = getMocks();
 
 const place = Array.from({length:1}, () => getBookingQuest());
 
-export {mock, mocks,place, bookingQuests, CARDS_COUNT};
+export {mock, mocks,place, bookingQuest, bookingQuests, CARDS_COUNT};
 
 
