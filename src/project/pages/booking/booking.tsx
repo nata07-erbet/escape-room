@@ -4,15 +4,24 @@ import { TBookingQuest } from '../../types/types';
 import { TQuestFull } from '../../types/types';
 import { useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
+import { AppRoute, RequestStatus } from '../../const/const';
+import { NotSendForm } from '../404/not-send-form';
+
 type BookingProps ={
   place: TBookingQuest[];
   quest: TQuestFull;
 }
 
 function Booking ({ place, quest }: BookingProps) {
-  const { title } = quest;
+  const navigate = useNavigate();
+
+  const { title, peopleMinMax } = quest;
   const { location, slots} = place[0];
   const { today , tomorrow } = slots;
+
+  const isSuccsess = false;
+  const isNotSuccsess = true;
 
   const {
     register,
@@ -20,7 +29,13 @@ function Booking ({ place, quest }: BookingProps) {
     formState: { errors }
   } = useForm();
 
-  const onSubmit = (evt:SubmitEvent<HTMLElement>) => evt.preventDefault(); //не знаю какой тип писать
+  const onSubmit = () =>{
+    if(isSuccsess) {
+      navigate(AppRoute.MyQuests);
+    }
+    alert('Форма не отправлена - попробуйте еще раз!');
+  };
+
 
   return (
     <div className="wrapper">
@@ -65,7 +80,10 @@ function Booking ({ place, quest }: BookingProps) {
             className="booking-form"
             action="https://echo.htmlacademy.ru/"
             method="post"
+            onSubmit={handleSubmit(onSubmit)}
           >
+            {isNotSuccsess && <p>Форма не отправлена - попробуйте еще раз!</p>}
+
             <fieldset className="booking-form__section">
               <legend className="visually-hidden">Выбор даты и времени</legend>
               <fieldset className="booking-form__date-section">
@@ -116,12 +134,15 @@ function Booking ({ place, quest }: BookingProps) {
                 <input
                   type="text"
                   id="name"
-                  {...register('name', {required: true})}
+                  {...register('name', {
+                    required: 'Please enter your name',
+                    pattern: {
+                      value: '^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$',
+                    },
+                  })}
                   placeholder="Имя"
-                  required
-                  pattern="^/[А-Яа-яЁёA-Za-z'- ]{1,15}$" // хз?
                 />
-                {errors.name?.type === 'required' && <><br/><span role="alert">&apos;Укажите имя&apos;</span></>}
+                {errors.name && <><br/><span role="alert">&apos;{errors.name?.message}&apos;</span></>}
               </div>
               <div className="custom-input booking-form__input">
 
@@ -131,12 +152,17 @@ function Booking ({ place, quest }: BookingProps) {
                 <input
                   type="tel"
                   id="tel"
-                  name="tel"
+                  {...register('tel',{
+                    required: 'Укажите контактный телефон',
+                    pattern: {
+                      value: '^(\+?7|8)?9\d{9}$',
+                    }
+                  })}
                   placeholder="Телефон"
-                  required
-                  pattern="^(\+?7|8)?9\d{9}$" //хз?
                 />
+                {errors.tel && <><br/><span role="alert">&apos;{errors.tel?.message}&apos;</span></>}
               </div>
+
               <div className="custom-input booking-form__input">
                 <label className="custom-input__label" htmlFor="person">
             Количество участников
@@ -144,18 +170,31 @@ function Booking ({ place, quest }: BookingProps) {
                 <input
                   type="number"
                   id="person"
-                  name="person"
+                  {...register('person', {
+                    required : 'Введите количество участников',
+                    pattern: {
+                      value: `[${peopleMinMax[0]}- ${peopleMinMax[1]}}]`,
+                    }
+                  })}
                   placeholder="Количество участников"
-                  required
                 />
+                {errors.person && <><br/><span role="alert">&apos;{errors.person?.message}&apos;</span></>}
               </div>
+
               <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
                 <input
                   type="checkbox"
                   id="children"
-                  name="children"
+                  {...register('children', {
+                    required: 'Укажите целое число детей',
+                    pattern: {
+                      value: '/^[\dA-Z]+$/i',
+                    }
+                  })}
                   defaultChecked
                 />
+                {errors.children && <><br/><span role="alert">&apos;{errors.children?.message}&apos;</span></>}
+
                 <span className="custom-checkbox__icon">
                   <svg width={20} height={17} aria-hidden="true">
                     <use xlinkHref="#icon-tick" />
@@ -169,7 +208,6 @@ function Booking ({ place, quest }: BookingProps) {
             <button
               className="btn btn--accent btn--cta booking-form__submit"
               type="submit"
-              onSubmit={handleSubmit(onSubmit)}
             >
         Забронировать
             </button>

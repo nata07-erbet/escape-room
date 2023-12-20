@@ -24,6 +24,7 @@ const ComplicationMap = {
   Hard: 'Сложный'
 };
 
+
 const COMPLICATION = [
   'Любой',
   'Лёгкий',
@@ -48,4 +49,10 @@ const enum AuthorizationStatus {
   UnKnown= 'UNKNOWN',
 }
 
-export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus, TopicMap, ComplicationMap };
+const enum RequestStatus {
+  Idle = 'Idle',
+  Pending = 'Pending',
+  Error = 'Error',
+  Success = 'Success'
+}
+export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus, TopicMap, ComplicationMap, RequestStatus};
