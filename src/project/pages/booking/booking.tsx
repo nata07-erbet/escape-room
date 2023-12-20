@@ -1,6 +1,6 @@
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
-import { TBookingQuest } from '../../types/types';
+import { TGetBookingQuest } from '../../types/types';
 import { TQuestFull } from '../../types/types';
 import { useForm } from 'react-hook-form';
 
@@ -9,7 +9,7 @@ import { AppRoute, RequestStatus } from '../../const/const';
 import { NotSendForm } from '../404/not-send-form';
 
 type BookingProps ={
-  place: TBookingQuest[];
+  place: TGetBookingQuest[];
   quest: TQuestFull;
 }
 
@@ -33,6 +33,7 @@ function Booking ({ place, quest }: BookingProps) {
     if(isSuccsess) {
       navigate(AppRoute.MyQuests);
     }
+    // eslint-disable-next-line no-alert
     alert('Форма не отправлена - попробуйте еще раз!');
   };
 

@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
 
-
 import { Catalog } from '../../pages/catalog/catalog';
 import { Quest } from '../../pages/quest/quest';
 import { Contacts } from '../../pages/contacts/contacts';
@@ -9,9 +8,8 @@ import { Login } from '../../pages/login/login';
 import { Booking } from '../../pages/booking/booking';
 import { MyQuests } from '../../pages/my-quests/my-quests';
 import { NotFondPage } from '../../pages/404/404';
-import { mocks, mock, place } from '../../mocks/mocks';
+import { mocks, mock, place, bookingQuests} from '../../mocks/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
-
 
 const router = createBrowserRouter([
   {
@@ -55,7 +53,7 @@ const router = createBrowserRouter([
       restrictedFor={AuthorizationStatus.NoAuth}
       redirectTo={AppRoute.Login}
     >
-      <MyQuests />
+      <MyQuests quests={ bookingQuests }/>
     </ProtectedRoute>
   },
 

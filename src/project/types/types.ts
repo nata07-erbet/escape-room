@@ -5,7 +5,7 @@ type TQuest = {
   previewImg: string;
   previewImgWebp: string;
   level: 'easy' |'medium' | 'hard';
-  type:  'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
+  type: 'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
   peopleMinMax: number[];
 }
 
@@ -57,4 +57,4 @@ type TResponseBookedQuest = ResponseQuest & {
 }
 
 
-export type { TQuest, TQuestFull, TResponseBookedQuest };
+export type { TQuest, TQuestFull, TResponseBookedQuest, TGetBookingQuest };

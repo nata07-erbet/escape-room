@@ -7,8 +7,11 @@ type TCard ={
   quest: TQuest;
 }
 
+const isBooked = false;
+
 function Card({ quest }: TCard) {
   const {id, title, level, previewImg, peopleMinMax} = quest;
+
 
   return (
     <div className="quest-card">
