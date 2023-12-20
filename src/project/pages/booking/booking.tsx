@@ -2,6 +2,7 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { TBookingQuest } from '../../types/types';
 import { TQuestFull } from '../../types/types';
+import { useForm } from 'react-hook-form';
 
 type BookingProps ={
   place: TBookingQuest[];
@@ -12,6 +13,14 @@ function Booking ({ place, quest }: BookingProps) {
   const { title } = quest;
   const { location, slots} = place[0];
   const { today , tomorrow } = slots;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
+  const onSubmit = (evt:SubmitEvent<HTMLElement>) => evt.preventDefault(); //не знаю какой тип писать
 
   return (
     <div className="wrapper">
@@ -35,7 +44,7 @@ function Booking ({ place, quest }: BookingProps) {
         <div className="container container--size-s">
           <div className="page-content__title-wrapper">
             <h1 className="subtitle subtitle--size-l page-content__subtitle">
-        Бронирование квеста
+            Бронирование квеста
             </h1>
             <p className="title title--size-m title--uppercase page-content__title">
               {title}
@@ -68,7 +77,6 @@ function Booking ({ place, quest }: BookingProps) {
                       <input
                         type="radio"
                         id={item.time}
-                        name="date"
                         required
                         value={item.time}
                         disabled={item.isAvailable}
@@ -108,13 +116,15 @@ function Booking ({ place, quest }: BookingProps) {
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  {...register('name', {required: true})}
                   placeholder="Имя"
                   required
-                  pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
+                  pattern="^/[А-Яа-яЁёA-Za-z'- ]{1,15}$" // хз?
                 />
+                {errors.name?.type === 'required' && <><br/><span role="alert">&apos;Укажите имя&apos;</span></>}
               </div>
               <div className="custom-input booking-form__input">
+
                 <label className="custom-input__label" htmlFor="tel">
             Контактный телефон
                 </label>
@@ -124,7 +134,7 @@ function Booking ({ place, quest }: BookingProps) {
                   name="tel"
                   placeholder="Телефон"
                   required
-                  pattern="[0-9]{10,}"
+                  pattern="^(\+?7|8)?9\d{9}$" //хз?
                 />
               </div>
               <div className="custom-input booking-form__input">
@@ -159,6 +169,7 @@ function Booking ({ place, quest }: BookingProps) {
             <button
               className="btn btn--accent btn--cta booking-form__submit"
               type="submit"
+              onSubmit={handleSubmit(onSubmit)}
             >
         Забронировать
             </button>

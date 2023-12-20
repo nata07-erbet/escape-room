@@ -3,6 +3,7 @@ import { ErrorMessage } from '@hookform/error-message';
 
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { FormEvent } from 'react';
 
 interface FormInputs {
   email: string;
@@ -16,7 +17,7 @@ function Login() {
     handleSubmit,
   } = useForm<FormInputs>();
 
-  const onSubmit = (data: FormInputs) => console.log(data);
+  const onSubmit = (evt:FormEvent<HTMLFormElement>) => evt.preventDefault();
 
   return (
     <div className="wrapper">
@@ -60,7 +61,7 @@ function Login() {
                       {...register('email', {
                         required: true,
                         pattern: {
-                          value: /^([A-Za-z0-9_\-.])+\\@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/,
+                          value: '^(.+)@(.+)\.(.+)$', //хз списала
                           message: 'Error mail' //нет сообщения об ошибках
                         }
                       })}
@@ -80,9 +81,19 @@ function Login() {
                       id="password"
                       placeholder="Пароль"
                       required
-                      {...register('singleErrorInput', { required: true, minLength:3, maxLength:15,
-                        pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/i // не прошло
-                      })}
+                      {...register('password', {
+                        required: true, minLength:3, maxLength:15,
+                        pattern: {
+                          value: '^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)',
+                          message: 'Error password'
+                        }
+                      })
+                      }
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name= 'password'
+                      render ={({message}) => <p>{message}</p>}
                     />
                   </div>
                 </div>

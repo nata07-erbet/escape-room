@@ -1,4 +1,3 @@
-import { TReservation } from '../types/types';
 
 const TOPICS = [
   'Все квесты',

@@ -2,8 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { mockAuthStatus } from '../../mocks/auth';
 
-// const authorizationStatus = mockAuthStatus();
-const authorizationStatus = AuthorizationStatus.Auth;
+const authorizationStatus = mockAuthStatus();
 
 function Header() {
   return(
