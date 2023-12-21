@@ -1,15 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm} from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { FormEvent } from 'react';
+import { AppRoute } from '../../const/const';
 
 interface FormInputs {
   email: string;
 }
 
 function Login() {
+  const navigate = useNavigate();
 
   const {
     register,
@@ -17,7 +20,10 @@ function Login() {
     handleSubmit,
   } = useForm<FormInputs>();
 
-  const onSubmit = (evt:FormEvent<HTMLFormElement>) => evt.preventDefault();
+  const onSubmit = (evt:FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    navigate(AppRoute.Main);
+  };
 
   return (
     <div className="wrapper">
@@ -100,7 +106,6 @@ function Login() {
                 <button
                   className="btn btn--accent btn--general login-form__submit"
                   type="submit"
-                  onSubmit={handleSubmit(onSubmit)}
                 >
               Войти
                 </button>

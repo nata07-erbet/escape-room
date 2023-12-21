@@ -5,8 +5,7 @@ import { TQuestFull } from '../../types/types';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
-import { AppRoute, RequestStatus } from '../../const/const';
-import { NotSendForm } from '../404/not-send-form';
+import { AppRoute } from '../../const/const';
 
 type BookingProps ={
   place: TGetBookingQuest[];
@@ -20,8 +19,8 @@ function Booking ({ place, quest }: BookingProps) {
   const { location, slots} = place[0];
   const { today , tomorrow } = slots;
 
-  const isSuccsess = false;
-  const isNotSuccsess = true;
+  const isSuccsess = true;
+  const isNotSuccsess = false;
 
   const {
     register,
