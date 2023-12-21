@@ -15,8 +15,8 @@ function Catalog({quests}: CatalogProps) {
     const sortedQuests = quests.filter((quest) => quest.type === TopicMap.adventure);
     return sortedQuests;
   };
-// ПОЛУЧИЛОСЬ!!!  
-  console.log(getSortedQuestsByAdventure());
+//ПОЛУЧИЛОСЬ!!!
+
 
   const handleSortTypes = () => {
     console.log('hi');
