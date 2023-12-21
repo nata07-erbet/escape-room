@@ -1,35 +1,37 @@
 import { TResponseBookedQuest } from '../../types/types';
 
 type MyQuest ={
-  booking: TResponseBookedQuest;
+  bookingQuest: TResponseBookedQuest;
+  onClickDeleteBooking:() => void;
 }
 
-function MyQuest ({booking}: MyQuest){
+
+function MyQuest ({bookingQuest, onClickDeleteBooking}: MyQuest){
 
   return (
-    <div className="quest-card" key={booking.id}>
+    <div className="quest-card" key={bookingQuest.id}>
       <div className="quest-card__img">
         <picture>
           <source
             type="image/webp"
-            srcSet={booking.quest.previewImgWebp}
+            srcSet={bookingQuest.quest.previewImgWebp}
           />
           <img
-            src={booking.quest.previewImg}
-            srcSet={booking.quest.previewImg}
+            src={bookingQuest.quest.previewImg}
+            srcSet={bookingQuest.quest.previewImg}
             width={344}
             height={232}
-            alt={booking.quest.title}
+            alt={bookingQuest.quest.title}
           />
         </picture>
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <a className="quest-card__link" href="quest.html">
-            {booking.quest.title}
+            {bookingQuest.quest.title}
           </a>
           <span className="quest-card__info">
-                [{booking.date},&nbsp;{booking.time} {booking.location.address}
+                [{bookingQuest.date},&nbsp;{bookingQuest.time} {bookingQuest.location.address}
                       ]
           </span>
         </div>
@@ -38,20 +40,21 @@ function MyQuest ({booking}: MyQuest){
             <svg width={11} height={14} aria-hidden="true">
               <use xlinkHref="#icon-person" />
             </svg>
-            {booking.quest.peopleMinMax[0]}&nbsp;чел
+            {bookingQuest.quest.peopleMinMax[0]}&nbsp;чел
           </li>
           <li className="tags__item">
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {booking.quest.level}
+            {bookingQuest.quest.level}
           </li>
         </ul>
         <button
           className="btn btn--accent btn--secondary quest-card__btn"
           type="button"
+          onClick={onClickDeleteBooking}
         >
-                     Отменить
+          Отменить
         </button>
       </div>
     </div>

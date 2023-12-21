@@ -31,7 +31,7 @@ type TSlots ={
 };
 
 type TPostBookingQuest = {
-date: 'today' | 'tomorrow';
+date: string; // в спеке enum
 time: string;
 contactPerson: string;
 phone: string;

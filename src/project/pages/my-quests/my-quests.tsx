@@ -1,13 +1,23 @@
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
-import { TResponseBookedQuest } from '../../types/types';
 import { MyQuest } from '../../components/my-quest/my-quest';
+import { TResponseBookedQuest } from '../../types/types';
+import { useState } from 'react';
 
 type MyQuestsProps = {
   quests: TResponseBookedQuest[];
 };
 
 function MyQuests({ quests }: MyQuestsProps) {
+
+  //данные о бронировании, которые приходят с сервера
+  const [ bookingQuests, setBookingQuests ] = useState(quests);
+
+  const handleClickDeleteBooking = (id:string) => {
+    setBookingQuests((prevState) => prevState.filter((quest) => quest.id !== id)); //хз?
+  };
+
+
   return(
     <div className="wrapper">
       <Header />
@@ -34,8 +44,9 @@ function MyQuests({ quests }: MyQuestsProps) {
             </h1>
           </div>
           <div className="cards-grid">
-            {quests.map((booking) => (
-              <MyQuest booking={booking} key={booking.id}/>
+            {/* {удаляет сразу все карточки} */}
+            {bookingQuests.map((bookingQuest) => (
+              <MyQuest bookingQuest={bookingQuest} key={bookingQuest.id} onClickDeleteBooking ={handleClickDeleteBooking(bookingQuest.id)}/>
             ))}
 
           </div>
