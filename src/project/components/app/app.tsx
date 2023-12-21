@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       restrictedFor={AuthorizationStatus.NoAuth}
       redirectTo={AppRoute.Login}
     >
-      <MyQuests quests = {bookingQuests}/>
+      <MyQuests quests = { bookingQuests }/>
     </ProtectedRoute>
   },
 

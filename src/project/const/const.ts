@@ -8,6 +8,14 @@ const TOPICS = [
   'Sci-fi',
 ] as const;
 
+const COMPLICATION = [
+  'Любой',
+  'Лёгкий',
+  'Средний',
+  'Сложный'
+] as const;
+
+
 const TopicMap = {
   allQuests: 'Все квесты',
   adventure:'Приключения',
@@ -18,19 +26,11 @@ const TopicMap = {
 };
 
 const ComplicationMap = {
-  Any: 'Любой',
-  Easy: 'Лёгкий',
-  Middle: 'Средний',
-  Hard: 'Сложный'
+  any: 'Любой',
+  easy: 'Лёгкий',
+  middle: 'Средний',
+  hard: 'Сложный'
 };
-
-
-const COMPLICATION = [
-  'Любой',
-  'Лёгкий',
-  'Средний',
-  'Сложный',
-] as const;
 
 
 enum AppRoute {

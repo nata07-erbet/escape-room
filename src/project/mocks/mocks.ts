@@ -1,5 +1,7 @@
 import { faker } from '@faker-js/faker';
 
+import { TOPICS, COMPLICATION } from '../const/const';
+
 const CARDS_COUNT = faker.number.int({ min: 8, max: 15 });
 const getMock = () => (
   {
@@ -7,8 +9,8 @@ const getMock = () => (
     title: faker.lorem.word(),
     previewImg: faker.image.urlLoremFlickr(),
     previewImgWebp:faker.image.urlPicsumPhotos(),
-    level: faker.lorem.word(),
-    type: faker.lorem.word(),
+    level:faker.helpers.arrayElement(COMPLICATION),
+    type:  faker.helpers.arrayElement(TOPICS),
     peopleMinMax: faker.helpers.arrayElements([1, 2, 3, 4, 5], 2),
   }
 );
@@ -57,7 +59,7 @@ const getMocks = () => Array.from({length: CARDS_COUNT}, () => getMock());
 //Бронирование квеста
 const getPostBookingQuest = () => (
   {
-    date:() => faker.helpers.arrayElements('today', 'tomorrow'),
+    date: faker.helpers.arrayElement(['today', 'tomorrow']),
     time: new Date().getDate() + faker.number.int({ min: 0, max: 3 }),
     contactPerson: faker.lorem.word(),
     phone: faker.number.int({ min: 89154, max: 89999 }),
@@ -69,7 +71,7 @@ const getPostBookingQuest = () => (
 
 const getResponseBookedQuest = () => (
   {
-    date:() => faker.datatype.boolean() ? 'today' : 'tomorrow',
+    date: faker.lorem.word(),
     time: new Date().getDate() + faker.number.int({ min: 0, max: 3 }),
     contactPerson: faker.lorem.word(),
     phone: faker.number.int({ min: 89154, max: 89999 }),
@@ -109,6 +111,8 @@ const mocks = getMocks();
 
 const place = Array.from({length:1}, () => getBookingQuest());
 
-export {mock, mocks,place, bookingQuest, bookingQuests, bookingQuestsForDelete, CARDS_COUNT};
+const sortQuestTest = Array.from({length: 7}, () => getMock());
+
+export {mock, mocks,place, bookingQuest, bookingQuests, bookingQuestsForDelete, CARDS_COUNT, sortQuestTest};
 
 

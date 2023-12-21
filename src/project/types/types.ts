@@ -1,3 +1,4 @@
+import { TopicMap, ComplicationMap } from '../const/const';
 
 type TQuest = {
   id: string;
@@ -31,10 +32,10 @@ type TSlots ={
 };
 
 type TPostBookingQuest = {
-date: string; // в спеке enum
+date: 'today' | 'tomorrow'; // в спеке enum
 time: string;
 contactPerson: string;
-phone: string;
+phone: number; //в спеке string
 withChildren: boolean;
 peopleCount: number;
 placeId: string;
@@ -56,5 +57,8 @@ type TResponseBookedQuest = ResponseQuest & {
   quest: TQuest;
 }
 
+type TTopic = keyof typeof TopicMap;
+type TComplication = keyof typeof ComplicationMap;
 
-export type { TQuest, TQuestFull, TResponseBookedQuest, TGetBookingQuest };
+
+export type { TQuest, TQuestFull, TResponseBookedQuest, TGetBookingQuest, TTopic, TComplication };
