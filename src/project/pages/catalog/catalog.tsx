@@ -2,25 +2,44 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Card } from '../../components/card/card';
 import { FormFilters } from '../../components/form-filters/form-filters';
-import { TQuest } from '../../types/types';
-import { TopicMap } from '../../const/const';
+import {TopicMapForSorting, ComplicationMapForSorting} from '../../const/const';
+import { TQuest, TTopic, TComplication } from '../../types/types';
+import { sortingByTopic, sortingByComplication } from '../../utils/sorting';
+import { useState } from 'react';
 
 type CatalogProps ={
   quests: TQuest[];
 }
 
 function Catalog({quests}: CatalogProps) {
+  const [activeFilter, setActiveFilter] = useState<TTopic>(TopicMapForSorting.allQuests);
 
-  const getSortedQuestsByAdventure = () => {
-    const sortedQuests = quests.filter((quest) => quest.type === TopicMap.adventure);
-    return sortedQuests;
+
+  const getSortingQuestsByTopic = (filter: TTopic) => {
+    switch(filter) {
+      case 'allQuests':
+      default:
+        return sortingByTopic.allQuests(quests);
+      case 'adventure':
+        return sortingByTopic.adventure(quests);
+      case 'horror':
+        return sortingByTopic.horror(quests);
+      case 'mystic':
+        return sortingByTopic.mystic(quests);
+      case 'detective':
+        return sortingByTopic.detective(quests);
+      case 'sciFi':
+        return sortingByTopic.sciFi(quests);
+    }
   };
-//ПОЛУЧИЛОСЬ!!!
 
+  let sortedQuests = (getSortingQuestsByTopic(activeFilter));
 
-  const handleSortTypes = () => {
-    console.log('hi');
+  const handleSortTypes = (filter: TTopic) => {
+    sortedQuests = getSortingQuestsByTopic(activeFilter);
+    setActiveFilter(filter);
   };
+
 
   return(
     <>
@@ -40,7 +59,7 @@ function Catalog({quests}: CatalogProps) {
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
-            {quests.map((quest) => (
+            {sortedQuests.map((quest) => (
               <Card
                 quest={quest}
                 key={quest.id}

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { TOPICS, COMPLICATION } from '../const/const';
+import { TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING} from '../const/const';
 
 const CARDS_COUNT = faker.number.int({ min: 8, max: 15 });
 const getMock = () => (
@@ -9,8 +9,8 @@ const getMock = () => (
     title: faker.lorem.word(),
     previewImg: faker.image.urlLoremFlickr(),
     previewImgWebp:faker.image.urlPicsumPhotos(),
-    level:faker.helpers.arrayElement(COMPLICATION),
-    type:  faker.helpers.arrayElement(TOPICS),
+    level:faker.helpers.arrayElement(COMPLICATION_FOR_SORTING),
+    type:  faker.helpers.arrayElement(TOPICS_FOR_SORTING),
     peopleMinMax: faker.helpers.arrayElements([1, 2, 3, 4, 5], 2),
   }
 );

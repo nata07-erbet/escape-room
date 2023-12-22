@@ -8,6 +8,15 @@ const TOPICS = [
   'Sci-fi',
 ] as const;
 
+const TOPICS_FOR_SORTING = [
+  'allQuests',
+  'adventure',
+  'horror',
+  'mystic',
+  'detective',
+  'sciFi',
+] as const;
+
 const COMPLICATION = [
   'Любой',
   'Лёгкий',
@@ -15,6 +24,23 @@ const COMPLICATION = [
   'Сложный'
 ] as const;
 
+const COMPLICATION_FOR_SORTING = [
+  'allQuests',
+  'adventure',
+  'horror',
+  'mystic',
+  'detective',
+  'sciFi'
+] as const;
+
+const TopicMapForSorting = {
+  allQuests: 'allQuests',
+  adventure:'adventure',
+  horror: 'horror',
+  mystic: 'mystic',
+  detective: 'detective',
+  sciFi: 'sciFi',
+} as const;
 
 const TopicMap = {
   allQuests: 'Все квесты',
@@ -24,6 +50,13 @@ const TopicMap = {
   detective: 'Детектив',
   sciFi: 'Sci-fi',
 };
+
+const ComplicationMapForSorting = {
+  any: 'any',
+  easy: 'easy',
+  middle: 'middle',
+  hard: 'hard'
+} as const;
 
 const ComplicationMap = {
   any: 'Любой',
@@ -55,4 +88,4 @@ const enum RequestStatus {
   Error = 'Error',
   Success = 'Success'
 }
-export { TOPICS, COMPLICATION, AppRoute, AuthorizationStatus, TopicMap, ComplicationMap, RequestStatus};
+export { TOPICS, COMPLICATION, TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING, AppRoute, AuthorizationStatus, TopicMap, TopicMapForSorting, ComplicationMap,ComplicationMapForSorting, RequestStatus};

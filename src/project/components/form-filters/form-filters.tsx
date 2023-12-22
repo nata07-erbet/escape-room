@@ -4,23 +4,23 @@ import { ComplicationMap, TopicMap} from '../../const/const';
 import { TTopic, TComplication } from '../../types/types';
 
 type FormFilters ={
-  onClick: (filterTopic: TComplication, filterMap: TComplication) => void;
+  onClick: (filterTopic: TTopic) => void;
 };
 
-function FormFilters({ onClick }) {
+function FormFilters({ onClick }: FormFilters) {
   const [filterTopicActive, setFilterTopicActive] = useState(TopicMap.allQuests);
   const [filterComplicationActive, setFilterComplicationActive] = useState(ComplicationMap.any);
 
 
   const handleTopicFilterChange = (key: TTopic) => {
     onClick(key);
-    setFilterTopicActive((prevState) => !prevState);
+
 
   };
 
   const handleComplicatioFilterChange = (key: TTopic) => {
     onClick(key);
-    setFilterComplicationActive((prevState) => !prevState);
+
   };
 
 
@@ -44,7 +44,7 @@ function FormFilters({ onClick }) {
                 name="type"
                 id={value}
                 checked = {value === filterTopicActive}
-                onChange={() => handleTopicFilterChange(key)}
+                onClick={() => handleTopicFilterChange(key)}
               />
               <label className="filter__label" htmlFor={key}>
                 <svg className="filter__icon" width={26} height={30} aria-hidden="true">
@@ -75,7 +75,7 @@ function FormFilters({ onClick }) {
                   name="level"
                   id={value}
                   checked = {value === filterComplicationActive}
-                  onChange={() => handleComplicatioFilterChange(key)}
+                  onClick={() => handleComplicatioFilterChange(key)}
                 />
                 <label className="filter__label" htmlFor="any">
                   <span className="filter__label-text">{value}</span>
