@@ -55,7 +55,7 @@ function Catalog({quests}: CatalogProps) {
             </h2>
           </div>
           <div className="page-content__item">
-            <FormFilters onClick ={ handleSortTypes } />
+            <FormFilters activeFilter ={activeFilter} onClick ={ handleSortTypes } />
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">

@@ -5,15 +5,17 @@ import { TTopic, TComplication } from '../../types/types';
 
 type FormFilters ={
   onClick: (filterTopic: TTopic) => void;
+  activeFilter: TTopic;
 };
 
-function FormFilters({ onClick }: FormFilters) {
+function FormFilters({ activeFilter, onClick }: FormFilters) {
   const [filterTopicActive, setFilterTopicActive] = useState(TopicMap.allQuests);
   const [filterComplicationActive, setFilterComplicationActive] = useState(ComplicationMap.any);
 
 
   const handleTopicFilterChange = (key: TTopic) => {
     onClick(key);
+    setFilterTopicActive(activeFilter);
 
 
   };
