@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import { TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING} from '../const/const';
 
-const CARDS_COUNT = faker.number.int({ min: 8, max: 15 });
+const CARDS_COUNT = faker.number.int({ min: 15, max: 25 });
 const getMock = () => (
   {
     id: faker.string.uuid(),

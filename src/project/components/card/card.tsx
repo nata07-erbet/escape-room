@@ -9,7 +9,7 @@ type TCard ={
 
 
 function Card({ quest }: TCard) {
-  const {id, title, level, previewImg, peopleMinMax} = quest;
+  const { id, title, level, previewImg, peopleMinMax, type } = quest;
 
 
   return (
@@ -32,7 +32,7 @@ function Card({ quest }: TCard) {
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <NavLink className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>
-            {title}
+            {title} <br /> {type}
           </NavLink>
         </div>
         <ul className="tags quest-card__tags">

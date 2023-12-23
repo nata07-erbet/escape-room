@@ -25,12 +25,10 @@ const COMPLICATION = [
 ] as const;
 
 const COMPLICATION_FOR_SORTING = [
-  'allQuests',
-  'adventure',
-  'horror',
-  'mystic',
-  'detective',
-  'sciFi'
+  'any',
+  'easy',
+  'middle',
+  'hard',
 ] as const;
 
 const TopicMapForSorting = {

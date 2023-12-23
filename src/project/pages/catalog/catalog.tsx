@@ -12,34 +12,55 @@ type CatalogProps ={
 }
 
 function Catalog({quests}: CatalogProps) {
-  const [activeFilter, setActiveFilter] = useState<TTopic>(TopicMapForSorting.allQuests);
 
+  const [activeFilterTopic, setFilterTopic] = useState<TTopic>(TopicMapForSorting.allQuests);
+  const [activeFilterComplication, setFilterComplication] = useState<TComplication>(ComplicationMapForSorting.any);
 
   const getSortingQuestsByTopic = (filter: TTopic) => {
     switch(filter) {
-      case 'allQuests':
+      case TopicMapForSorting.allQuests:
       default:
         return sortingByTopic.allQuests(quests);
-      case 'adventure':
+      case TopicMapForSorting.adventure:
         return sortingByTopic.adventure(quests);
-      case 'horror':
+      case TopicMapForSorting.horror:
         return sortingByTopic.horror(quests);
-      case 'mystic':
+      case TopicMapForSorting.mystic:
         return sortingByTopic.mystic(quests);
-      case 'detective':
+      case TopicMapForSorting.detective:
         return sortingByTopic.detective(quests);
-      case 'sciFi':
+      case TopicMapForSorting.sciFi:
         return sortingByTopic.sciFi(quests);
     }
   };
 
-  let sortedQuests = (getSortingQuestsByTopic(activeFilter));
+  let sortedQuestsByTopic = getSortingQuestsByTopic(activeFilterTopic);
 
-  const handleSortTypes = (filter: TTopic) => {
-    sortedQuests = getSortingQuestsByTopic(activeFilter);
-    setActiveFilter(filter);
+  const getSortingQuestsByComplication = (filter: TComplication) => {
+    switch(filter) {
+      case ComplicationMapForSorting.any:
+      default:
+        return sortingByComplication.any(sortedQuestsByTopic);
+      case ComplicationMapForSorting.easy:
+        return sortingByComplication.easy(sortedQuestsByTopic);
+      case ComplicationMapForSorting.hard:
+        return sortingByComplication.hard(sortedQuestsByTopic);
+      case ComplicationMapForSorting.middle:
+        return sortingByComplication.middle(sortedQuestsByTopic);
+    }
   };
 
+  let sortedQuestsByComplication = getSortingQuestsByComplication(activeFilterComplication);
+
+  const handleSortTopicTypes = (filter: TTopic) => {
+    sortedQuestsByTopic = getSortingQuestsByTopic(filter);
+    setFilterTopic(filter);
+  };
+
+  const handleSortComplicationTypes = (filter: TComplication) => {
+    sortedQuestsByComplication = getSortingQuestsByComplication(filter);
+    setFilterComplication(filter);
+  };
 
   return(
     <>
@@ -55,11 +76,16 @@ function Catalog({quests}: CatalogProps) {
             </h2>
           </div>
           <div className="page-content__item">
-            <FormFilters activeFilter ={activeFilter} onClick ={ handleSortTypes } />
+            <FormFilters
+              activeFilterTopic ={activeFilterTopic}
+              onClickTopic ={handleSortTopicTypes}
+              activeFilterComplication={activeFilterComplication}
+              onClickComplication = {handleSortComplicationTypes}
+            />
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
-            {sortedQuests.map((quest) => (
+            {sortedQuestsByComplication.map((quest) => (
               <Card
                 quest={quest}
                 key={quest.id}

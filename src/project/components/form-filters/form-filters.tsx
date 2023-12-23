@@ -1,28 +1,23 @@
-import { useState } from 'react';
 
-import { ComplicationMap, TopicMap} from '../../const/const';
+import { TopicMapForSorting, ComplicationMapForSorting } from '../../const/const';
 import { TTopic, TComplication } from '../../types/types';
 
+
 type FormFilters ={
-  onClick: (filterTopic: TTopic) => void;
-  activeFilter: TTopic;
+  onClickTopic: (filterTopic: TTopic) => void;
+  activeFilterTopic: TTopic;
+  activeFilterComplication: TComplication;
+  onClickComplication: (filterComplication: TComplication) => void;
 };
 
-function FormFilters({ activeFilter, onClick }: FormFilters) {
-  const [filterTopicActive, setFilterTopicActive] = useState(TopicMap.allQuests);
-  const [filterComplicationActive, setFilterComplicationActive] = useState(ComplicationMap.any);
+function FormFilters({ activeFilterTopic, activeFilterComplication, onClickTopic, onClickComplication }: FormFilters) {
 
-
-  const handleTopicFilterChange = (key: TTopic) => {
-    onClick(key);
-    setFilterTopicActive(activeFilter);
-
-
+  const handleTopicFilterChange = (value: TTopic) => {
+    onClickTopic(value);
   };
 
-  const handleComplicatioFilterChange = (key: TTopic) => {
-    onClick(key);
-
+  const handleComplicatioFilterChange = (value: TComplication) => {
+    onClickComplication(value);
   };
 
 
@@ -32,9 +27,9 @@ function FormFilters({ activeFilter, onClick }: FormFilters) {
         <legend className="visually-hidden">Тематика</legend>
         <ul className="filter__list">
           {(
-            Object.entries(TopicMap) as [ //что это за дичь с типами?
+            Object.entries(TopicMapForSorting) as[
               TTopic,
-              (typeof TopicMap)[TTopic]
+              (typeof TopicMapForSorting)[TTopic]
             ][]
           ).map(([key, value]) => (
             <li
@@ -45,8 +40,8 @@ function FormFilters({ activeFilter, onClick }: FormFilters) {
                 type="radio"
                 name="type"
                 id={value}
-                checked = {value === filterTopicActive}
-                onClick={() => handleTopicFilterChange(key)}
+                checked = {value === activeFilterTopic}
+                onChange={() => handleTopicFilterChange(value)}
               />
               <label className="filter__label" htmlFor={key}>
                 <svg className="filter__icon" width={26} height={30} aria-hidden="true">
@@ -63,10 +58,7 @@ function FormFilters({ activeFilter, onClick }: FormFilters) {
       <fieldset className="filter__section">
         <legend className="visually-hidden">Сложность</legend>
         <ul className="filter__list">
-          {(Object.entries(ComplicationMap) as [
-            TComplication,
-            (typeof ComplicationMap)[TComplication]
-          ][])
+          {(Object.entries(ComplicationMapForSorting))
             .map(([key, value]) =>(
               <li
                 className="filter__item"
@@ -76,8 +68,9 @@ function FormFilters({ activeFilter, onClick }: FormFilters) {
                   type="radio"
                   name="level"
                   id={value}
-                  checked = {value === filterComplicationActive}
-                  onClick={() => handleComplicatioFilterChange(key)}
+                  checked={value === activeFilterComplication}
+                  onChange={() => handleComplicatioFilterChange(value)}
+
                 />
                 <label className="filter__label" htmlFor="any">
                   <span className="filter__label-text">{value}</span>
