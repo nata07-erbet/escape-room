@@ -67,7 +67,7 @@ function Login() {
                       {...register('email', {
                         required: true,
                         pattern: {
-                          value: ^(.+)@(.+)\.(.+)$, //хз списала
+                          value: '^(.+)@(.+)\.(.+)$', //хз списала
                           message: 'Error mail' //нет сообщения об ошибках
                         }
                       })}

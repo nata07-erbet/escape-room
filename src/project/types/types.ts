@@ -14,11 +14,11 @@ type TQuestFull = TQuest & {
   description: string;
   coverImg: string;
   coverImgWebp: string;
-}
+};
 
 type TLocation = {
   address: string;
-  coords: [number];
+  coords: number[];
   };
 
 type TSchedule = {

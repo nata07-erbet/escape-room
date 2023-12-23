@@ -63,6 +63,11 @@ const ComplicationMap = {
   hard: 'Сложный'
 };
 
+const ContactPosition = [
+  59.969826,
+  30.308044
+];
+
 
 enum AppRoute {
   Main = '/',
@@ -86,4 +91,4 @@ const enum RequestStatus {
   Error = 'Error',
   Success = 'Success'
 }
-export { TOPICS, COMPLICATION, TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING, AppRoute, AuthorizationStatus, TopicMap, TopicMapForSorting, ComplicationMap,ComplicationMapForSorting, RequestStatus};
+export { TOPICS, COMPLICATION, TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING, AppRoute, AuthorizationStatus, TopicMap, TopicMapForSorting, ComplicationMap,ComplicationMapForSorting, RequestStatus, ContactPosition};
