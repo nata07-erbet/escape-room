@@ -9,16 +9,16 @@ type MyQuestsProps = {
 };
 
 function MyQuests({ quests }: MyQuestsProps) {
-
-  //данные о бронировании, которые приходят с сервера
   const [ bookingQuests, setBookingQuests ] = useState(quests);
 
   const handleClickDeleteBooking = (id:string) => {
-    setBookingQuests((prevState) => prevState.filter((quest) => quest.id !== id)); //хз?
+    setBookingQuests((prevState) =>
+      prevState.filter((quest) => quest.id !== id)
+    );
   };
 
 
-  return(
+  return (
     <div className="wrapper">
       <Header />
       <main className="page-content decorated-page">
@@ -40,15 +40,19 @@ function MyQuests({ quests }: MyQuestsProps) {
         <div className="container">
           <div className="page-content__title-wrapper">
             <h1 className="title title--size-m page-content__title">
-          Мои бронирования
+              Мои бронирования
             </h1>
           </div>
           <div className="cards-grid">
-            {/* {удаляет сразу все карточки} */}
             {bookingQuests.map((bookingQuest) => (
-              <MyQuest bookingQuest={bookingQuest} key={bookingQuest.id} onClickDeleteBooking ={handleClickDeleteBooking(bookingQuest.id)}/>
+              <MyQuest
+                bookingQuest={bookingQuest}
+                key={bookingQuest.id}
+                onClickDeleteBooking ={
+                  () => handleClickDeleteBooking(bookingQuest.id) //почему здесь вызов?
+                }
+              />
             ))}
-
           </div>
         </div>
       </main>
