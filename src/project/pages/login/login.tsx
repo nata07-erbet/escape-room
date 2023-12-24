@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
-import { FormEvent } from 'react';
 import { AppRoute } from '../../const/const';
 
 interface FormInputs {
   email: string;
+  password: string;
 }
 
 function Login() {
@@ -20,9 +21,13 @@ function Login() {
     handleSubmit,
   } = useForm<FormInputs>();
 
-  const onSubmit = (evt:FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const onSubmit = () => {
     navigate(AppRoute.Main);
+  };
+
+  const onErrors = () => {
+    // eslint-disable-next-line no-alert
+    alert('Форма не отправлена!');
   };
 
   return (
@@ -50,7 +55,7 @@ function Login() {
               className="login-form"
               action="https://echo.htmlacademy.ru/"
               method="post"
-              onSubmit={handleSubmit(onSubmit)} // не уходит
+              onSubmit={handleSubmit(onSubmit, onErrors)} // не уходит
             >
               <div className="login-form__inner-wrapper">
                 <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -67,8 +72,8 @@ function Login() {
                       {...register('email', {
                         required: true,
                         pattern: {
-                          value: '^(.+)@(.+)\.(.+)$', //хз списала
-                          message: 'Error mail' //нет сообщения об ошибках
+                          value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                          message: 'Incorrect email',
                         }
                       })}
                     />
@@ -80,7 +85,7 @@ function Login() {
                   </div>
                   <div className="custom-input login-form__input">
                     <label className="custom-input__label" htmlFor="password">
-                  Пароль
+                      Пароль
                     </label>
                     <input
                       type="password"
@@ -88,11 +93,20 @@ function Login() {
                       placeholder="Пароль"
                       required
                       {...register('password', {
-                        required: true, minLength:3, maxLength:15,
+                        required: true,
+                        minLength: {
+                          value: 3,
+                          message: 'Password minimal length is 3',
+                        },
+                        maxLength: {
+                          value: 15,
+                          message: 'Password maximal length is 15',
+                        },
                         pattern: {
-                          value: '^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)',
-                          message: 'Error password'
-                        }
+                          value: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)/,
+                          message:
+                            'Password must contain at least one letter and one number',
+                        },
                       })
                       }
                     />
@@ -107,7 +121,7 @@ function Login() {
                   className="btn btn--accent btn--general login-form__submit"
                   type="submit"
                 >
-              Войти
+                Войти
                 </button>
               </div>
               <label className="custom-checkbox login-form__checkbox">
@@ -123,10 +137,13 @@ function Login() {
                   </svg>
                 </span>
                 <span className="custom-checkbox__label">
-              Я&nbsp;согласен с
-                  <a className="link link--active-silver link--underlined" href="#">
-                правилами обработки персональных данных
-                  </a>
+                  Я&nbsp;согласен с
+                  <Link
+                    className="link link--active-silver link--underlined"
+                    to="#"
+                  >
+                    правилами обработки персональных данных
+                  </Link>
               &nbsp;и пользовательским соглашением
                 </span>
               </label>
