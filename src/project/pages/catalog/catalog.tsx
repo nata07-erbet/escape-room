@@ -4,7 +4,7 @@ import { Card } from '../../components/card/card';
 import { FormFilters } from '../../components/form-filters/form-filters';
 import {TopicNamesMap, ComplicationMamesMap} from '../../const/const';
 import { TQuest, TTopic, TComplication } from '../../types/types';
-import { sortingByTopic, sortingByComplication } from '../../utils/sorting';
+import { sortingByTopic, sortingByComplication } from '../../utils/filters';
 import { useState } from 'react';
 
 type CatalogProps ={
@@ -21,8 +21,8 @@ function Catalog({quests}: CatalogProps) {
       case TopicNamesMap.allQuests:
       default:
         return sortingByTopic.allQuests(quests);
-      case TopicNamesMap.adventures:
-        return sortingByTopic.adventures(quests);
+      case TopicNamesMap.adventure:
+        return sortingByTopic.adventure(quests);
       case TopicNamesMap.horror:
         return sortingByTopic.horror(quests);
       case TopicNamesMap.mystic:

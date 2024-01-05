@@ -2,7 +2,7 @@ import { LatLngTuple } from 'leaflet';
 
 type TDate = 'today' | 'tomorrow';
 type TComplication = 'any' | 'easy' |'medium' | 'hard';
-type TTopic = 'allQuests' | 'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
+type TTopic = 'allQuests' | 'adventure'| 'horror' | 'mystic' |'detective' | 'sci-fi';
 
 type TQuest = {
   id: string;

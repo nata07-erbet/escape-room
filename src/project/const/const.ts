@@ -7,7 +7,7 @@ const DateNamesMap: Record<TDate, string> = {
 
 const TOPICS: TTopic[] = [
   'allQuests',
-  'adventures',
+  'adventure',
   'horror',
   'mystic',
   'detective',
@@ -16,7 +16,7 @@ const TOPICS: TTopic[] = [
 
 const TopicNamesMap: Record <TTopic, string > = {
   allQuests: 'Все квесты',
-  adventures:  'Приключения',
+  adventure:  'Приключения',
   horror: 'Ужасы',
   mystic: 'Мистика' ,
   detective:  'Детектив',
