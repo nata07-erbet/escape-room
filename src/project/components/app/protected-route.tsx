@@ -1,20 +1,22 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
-import { mockAuthStatus } from '../../mocks/auth';
+import { authorizationStatus } from '../../mocks/auth';
 
 type TProtectedRoute = {
-	restrictedFor: AuthorizationStatus;
+	restrictedFor: AuthorizationStatus[];
   redirectTo: AppRoute;
   children: JSX.Element;
 };
 
-function ProtectedRoute({restrictedFor, redirectTo, children}: TProtectedRoute): JSX.Element {
-  const authorizationStatus = mockAuthStatus();
-
-  return (
-    restrictedFor.includes(authorizationStatus) //пояснить
-      ? (children)
-      : (<Navigate to={redirectTo} />)
+function ProtectedRoute({
+  restrictedFor,
+  redirectTo,
+  children
+}: TProtectedRoute): JSX.Element {
+  return restrictedFor.includes(authorizationStatus) ? (
+    <Navigate to={redirectTo} />
+  ) : (
+    children
   );
 }
 

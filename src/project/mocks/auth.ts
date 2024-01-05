@@ -8,4 +8,4 @@ const mockAuthStatus = () =>
 
 const authorizationStatus = mockAuthStatus();
 
-export { mockAuthStatus, authorizationStatus };
+export { authorizationStatus };
