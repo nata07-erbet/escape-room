@@ -1,7 +1,11 @@
 import { NavLink } from 'react-router-dom';
 
 import { TQuest } from '../../types/types';
-import { AppRoute } from '../../const/const';
+import {
+  AppRoute,
+  ComplicationMamesMap,
+  TopicNamesMap,
+} from '../../const/const';
 
 type TCard ={
   quest: TQuest;
@@ -32,7 +36,7 @@ function Card({ quest }: TCard) {
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <NavLink className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>
-            {title} <br /> {type}
+            {title} <br /> {TopicNamesMap[type]}
           </NavLink>
         </div>
         <ul className="tags quest-card__tags">
@@ -46,7 +50,7 @@ function Card({ quest }: TCard) {
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {level}
+            {ComplicationMamesMap[level]}
           </li>
         </ul>
       </div>
