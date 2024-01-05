@@ -1,12 +1,16 @@
-import { TopicMap, ComplicationMap } from '../const/const';
+import { LatLngTuple } from 'leaflet';
+
+type TDate = 'today' | 'tomorrow';
+type TComplication = 'any' | 'easy' |'medium' | 'hard';
+type TTopic = 'allQuests' | 'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
 
 type TQuest = {
   id: string;
   title: string;
   previewImg: string;
   previewImgWebp: string;
-  level: 'easy' |'medium' | 'hard';
-  type: 'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
+  level: Exclude<TComplication, 'any' >;
+  type: Exclude<TTopic, 'allQuests'> ;
   peopleMinMax: number[];
 }
 
@@ -18,7 +22,7 @@ type TQuestFull = TQuest & {
 
 type TLocation = {
   address: string;
-  coords: number[];
+  coords: LatLngTuple;
   };
 
 type TSchedule = {
@@ -26,28 +30,25 @@ type TSchedule = {
   isAvailable: boolean;
 };
 
-type TSlots ={
-  today: TSchedule[];
-  tomorrow: TSchedule[];
+type TQuestPlace = {
+  id: string;
+  location: TLocation;
+  slots: TSlots;
 };
 
+type TGetBookingQuest = TQuestPlace[];
+type TSlots = Record<TDate, TSchedule[] >
+
 type TPostBookingQuest = {
-date: 'today' | 'tomorrow'; // в спеке enum
+date: TDate;
 time: string;
 contactPerson: string;
-phone: number; //в спеке string
+phone: string;
 withChildren: boolean;
 peopleCount: number;
 placeId: string;
 };
 
-type TGetBookingQuest = {
-  id: string;
-  location: TLocation;
-  slots: TSlots;
-  today: TSchedule[];
-  tomorrow: TSchedule[];
-};
 
 type ResponseQuest = Omit<TPostBookingQuest, 'placeId'>
 
@@ -57,8 +58,16 @@ type TResponseBookedQuest = ResponseQuest & {
   quest: TQuest;
 }
 
-type TTopic = keyof typeof TopicMap;
-type TComplication = keyof typeof ComplicationMap;
-
-
-export type { TQuest, TQuestFull, TResponseBookedQuest, TGetBookingQuest, TTopic, TComplication };
+export type {
+  TQuest,
+  TQuestFull,
+  TResponseBookedQuest,
+  TGetBookingQuest,
+  TTopic,
+  TComplication,
+  TDate,
+  TLocation,
+  TSchedule,
+  TQuestPlace,
+  TPostBookingQuest,
+};

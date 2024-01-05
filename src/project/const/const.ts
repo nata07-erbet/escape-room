@@ -1,66 +1,40 @@
+import { TTopic, TComplication, TDate } from '../types/types';
 
-const TOPICS = [
-  'Все квесты',
-  'Приключения',
-  'Ужасы',
-  'Мистика',
-  'Детектив',
-  'Sci-fi',
-] as const;
+const DateNamesMap: Record<TDate, string> = {
+  today: 'Сегодня',
+  tomorrow: 'Завтра',
+};
 
-const TOPICS_FOR_SORTING = [
+const TOPICS: TTopic[] = [
   'allQuests',
-  'adventure',
+  'adventures',
   'horror',
   'mystic',
   'detective',
-  'sciFi',
-] as const;
+  'sci-fi',
+];
 
-const COMPLICATION = [
-  'Любой',
-  'Лёгкий',
-  'Средний',
-  'Сложный'
-] as const;
-
-const COMPLICATION_FOR_SORTING = [
-  'any',
-  'easy',
-  'middle',
-  'hard',
-] as const;
-
-const TopicMapForSorting = {
-  allQuests: 'allQuests',
-  adventure:'adventure',
-  horror: 'horror',
-  mystic: 'mystic',
-  detective: 'detective',
-  sciFi: 'sciFi',
-} as const;
-
-const TopicMap = {
+const TopicNamesMap: Record <TTopic, string > = {
   allQuests: 'Все квесты',
-  adventure:'Приключения',
+  adventures:  'Приключения',
   horror: 'Ужасы',
-  mystic: 'Мистика',
-  detective: 'Детектив',
-  sciFi: 'Sci-fi',
+  mystic: 'Мистика' ,
+  detective:  'Детектив',
+  'sci-fi':  'Sci-fi',
 };
 
-const ComplicationMapForSorting = {
-  any: 'any',
-  easy: 'easy',
-  middle: 'middle',
-  hard: 'hard'
-} as const;
+const COMPLICATIONS: TComplication[] = [
+  'any',
+  'easy',
+  'medium',
+  'hard'
+];
 
-const ComplicationMap = {
+const ComplicationMamesMap: Record<TComplication, string> = {
   any: 'Любой',
   easy: 'Лёгкий',
-  middle: 'Средний',
-  hard: 'Сложный'
+  medium: 'Средний' ,
+  hard: 'Сложный',
 };
 
 const ContactPosition = [
@@ -91,4 +65,14 @@ const enum RequestStatus {
   Error = 'Error',
   Success = 'Success'
 }
-export { TOPICS, COMPLICATION, TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING, AppRoute, AuthorizationStatus, TopicMap, TopicMapForSorting, ComplicationMap,ComplicationMapForSorting, RequestStatus, ContactPosition};
+export {
+  DateNamesMap,
+  TOPICS,
+  TopicNamesMap,
+  COMPLICATIONS,
+  ComplicationMamesMap,
+  AppRoute,
+  AuthorizationStatus,
+  RequestStatus,
+  ContactPosition
+};
