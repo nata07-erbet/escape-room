@@ -1,7 +1,7 @@
-function NotFondPage() {
+function NotFoundPage() {
   return (
     <p>404 Not found</p>
   );
 }
 
-export { NotFondPage };
+export { NotFoundPage };
