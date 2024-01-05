@@ -9,15 +9,15 @@ import { AppRoute } from '../../const/const';
 import { ErrorMessage } from '@hookform/error-message';
 
 type BookingProps = {
-  place: TGetBookingQuest[];
+  places: TGetBookingQuest ;
   quest: TQuestFull;
 }
 
-function Booking({ place, quest }: BookingProps) {
+function Booking({ places, quest }: BookingProps) {
   const navigate = useNavigate();
 
   const { title, peopleMinMax } = quest;
-  const { location, slots } = place[0];
+  const { location, slots } = places[0];
   const { today , tomorrow } = slots;
 
   const {

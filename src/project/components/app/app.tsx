@@ -8,7 +8,7 @@ import { Login } from '../../pages/login/login';
 import { Booking } from '../../pages/booking/booking';
 import { MyQuests } from '../../pages/my-quests/my-quests';
 import { NotFondPage } from '../../pages/404/404';
-import { mocks, mock, place, bookingQuests } from '../../mocks/mocks';
+import { mocks, mock, places, bookingQuests } from '../../mocks/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
 
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         restrictedFor={AuthorizationStatus.NoAuth}
         redirectTo={AppRoute.Login}
       >
-        <Booking quest={ mock } place={ place }/>
+        <Booking quest={ mock } places={ places }/>
       </ProtectedRoute>
 
   },

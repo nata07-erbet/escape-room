@@ -2,7 +2,7 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Card } from '../../components/card/card';
 import { FormFilters } from '../../components/form-filters/form-filters';
-import {TopicMapForSorting, ComplicationMapForSorting} from '../../const/const';
+import {TopicNamesMap, ComplicationMamesMap} from '../../const/const';
 import { TQuest, TTopic, TComplication } from '../../types/types';
 import { sortingByTopic, sortingByComplication } from '../../utils/sorting';
 import { useState } from 'react';
@@ -13,24 +13,24 @@ type CatalogProps ={
 
 function Catalog({quests}: CatalogProps) {
 
-  const [activeFilterTopic, setFilterTopic] = useState<TTopic>(TopicMapForSorting.allQuests);
-  const [activeFilterComplication, setFilterComplication] = useState<TComplication>(ComplicationMapForSorting.any);
+  const [activeFilterTopic, setFilterTopic] = useState<TTopic>('allQuests');
+  const [activeFilterComplication, setFilterComplication] = useState<TComplication>('any');
 
   const getSortingQuestsByTopic = (filter: TTopic) => {
     switch(filter) {
-      case TopicMapForSorting.allQuests:
+      case TopicNamesMap.allQuests:
       default:
         return sortingByTopic.allQuests(quests);
-      case TopicMapForSorting.adventure:
-        return sortingByTopic.adventure(quests);
-      case TopicMapForSorting.horror:
+      case TopicNamesMap.adventures:
+        return sortingByTopic.adventures(quests);
+      case TopicNamesMap.horror:
         return sortingByTopic.horror(quests);
-      case TopicMapForSorting.mystic:
+      case TopicNamesMap.mystic:
         return sortingByTopic.mystic(quests);
-      case TopicMapForSorting.detective:
+      case TopicNamesMap.detective:
         return sortingByTopic.detective(quests);
-      case TopicMapForSorting.sciFi:
-        return sortingByTopic.sciFi(quests);
+      case TopicNamesMap['sci-fi']:
+        return sortingByTopic['sci-fi'](quests);
     }
   };
 
@@ -38,15 +38,15 @@ function Catalog({quests}: CatalogProps) {
 
   const getSortingQuestsByComplication = (filter: TComplication) => {
     switch(filter) {
-      case ComplicationMapForSorting.any:
+      case ComplicationMamesMap.any:
       default:
         return sortingByComplication.any(sortedQuestsByTopic);
-      case ComplicationMapForSorting.easy:
+      case ComplicationMamesMap.easy:
         return sortingByComplication.easy(sortedQuestsByTopic);
-      case ComplicationMapForSorting.hard:
+      case ComplicationMamesMap.hard:
         return sortingByComplication.hard(sortedQuestsByTopic);
-      case ComplicationMapForSorting.middle:
-        return sortingByComplication.middle(sortedQuestsByTopic);
+      case ComplicationMamesMap.medium:
+        return sortingByComplication.medium(sortedQuestsByTopic);
     }
   };
 

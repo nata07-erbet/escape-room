@@ -1,5 +1,5 @@
 
-import { TopicMapForSorting, ComplicationMapForSorting } from '../../const/const';
+import { TopicNamesMap, ComplicationMamesMap } from '../../const/const';
 import { TTopic, TComplication } from '../../types/types';
 
 
@@ -27,9 +27,9 @@ function FormFilters({ activeFilterTopic, activeFilterComplication, onClickTopic
         <legend className="visually-hidden">Тематика</legend>
         <ul className="filter__list">
           {(
-            Object.entries(TopicMapForSorting) as[
+            Object.entries(TopicNamesMap) as[
               TTopic,
-              (typeof TopicMapForSorting)[TTopic]
+              (typeof TopicNamesMap)[TTopic]
             ][]
           ).map(([key, value]) => (
             <li
@@ -58,7 +58,7 @@ function FormFilters({ activeFilterTopic, activeFilterComplication, onClickTopic
       <fieldset className="filter__section">
         <legend className="visually-hidden">Сложность</legend>
         <ul className="filter__list">
-          {(Object.entries(ComplicationMapForSorting))
+          {(Object.entries(ComplicationMamesMap))
             .map(([key, value]) =>(
               <li
                 className="filter__item"
