@@ -67,7 +67,9 @@ function Contacts() {
             </dl>
             <div className="contacts__map">
               <div className="map">
-                <Map position={ContactPosition} />
+                <Map center={ContactPosition}
+                  markers={[{ id: 'address', position: ContactPosition }]}
+                />
               </div>
             </div>
           </div>

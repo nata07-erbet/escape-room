@@ -66,8 +66,7 @@ function FormFilters({
                 id={key}
                 checked={key === activeFilterComplication}
                 onChange={() =>
-                  handleComplicationFilterChange(key as TComplication)
-                }
+                  handleComplicationFilterChange(key as TComplication)}
               />
               <label className="filter__label" htmlFor={key}>
                 <span className="filter__label-text">{value}</span>
