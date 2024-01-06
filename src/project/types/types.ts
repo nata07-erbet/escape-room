@@ -1,14 +1,24 @@
-import { TopicMap, ComplicationMap } from '../const/const';
+import { LatLngTuple } from 'leaflet';
+
+type TTopic =
+  | 'allQuests'
+  | 'adventure'
+  | 'horror'
+  | 'mystic'
+  | 'detective'
+  | 'sci-fi';
+
+type TComplication = 'any' | 'easy' | 'middle' | 'hard';
 
 type TQuest = {
   id: string;
   title: string;
   previewImg: string;
   previewImgWebp: string;
-  level: 'easy' |'medium' | 'hard';
-  type: 'adventures'| 'horror' | 'mystic' |'detective' | 'sci-fi';
+  level: Exclude<TComplication, 'any'>;
+  type: Exclude<TTopic, 'allQuests'>;
   peopleMinMax: number[];
-}
+};
 
 type TQuestFull = TQuest & {
   description: string;
@@ -18,47 +28,53 @@ type TQuestFull = TQuest & {
 
 type TLocation = {
   address: string;
-  coords: number[];
-  };
+  coords: LatLngTuple;
+};
+
+type TDate = 'today' | 'tomorrow';
 
 type TSchedule = {
   time: string;
   isAvailable: boolean;
 };
 
-type TSlots ={
-  today: TSchedule[];
-  tomorrow: TSchedule[];
-};
+type TSlots = Record<TDate, TSchedule[]>;
 
 type TPostBookingQuest = {
-date: 'today' | 'tomorrow'; // в спеке enum
-time: string;
-contactPerson: string;
-phone: number; //в спеке string
-withChildren: boolean;
-peopleCount: number;
-placeId: string;
+  date: TDate; // в спеке enum
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  placeId: string;
 };
 
-type TGetBookingQuest = {
+type TQuestPlace = {
   id: string;
   location: TLocation;
   slots: TSlots;
-  today: TSchedule[];
-  tomorrow: TSchedule[];
 };
 
-type ResponseQuest = Omit<TPostBookingQuest, 'placeId'>
+type TGetBookingQuest = TQuestPlace[];
+
+type ResponseQuest = Omit<TPostBookingQuest, 'placeId'>;
 
 type TResponseBookedQuest = ResponseQuest & {
   id: string;
   location: TLocation;
   quest: TQuest;
-}
+};
 
-type TTopic = keyof typeof TopicMap;
-type TComplication = keyof typeof ComplicationMap;
-
-
-export type { TQuest, TQuestFull, TResponseBookedQuest, TGetBookingQuest, TTopic, TComplication };
+export type {
+  TQuest,
+  TQuestFull,
+  TResponseBookedQuest,
+  TPostBookingQuest,
+  TGetBookingQuest,
+  TQuestPlace,
+  TDate,
+  TTopic,
+  TComplication,
+  TLocation,
+};

@@ -1,34 +1,50 @@
+import { LatLngTuple } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-type positionProps = {
-  position: number[];
-}
+type TMarker = {
+  id: string;
+  name?: string;
+  position: LatLngTuple;
+};
 
-function Map({position}: positionProps) {
+type MapProps = {
+  center: LatLngTuple;
+  markers: TMarker[];
+  selectedMarkerId?: TMarker['id'];
+  onMarkerClick?: (marker: TMarker) => void;
+};
+
+function Map({ center, markers, selectedMarkerId, onMarkerClick }: MapProps) {
   return (
     <MapContainer
-      center={position}
+      center={center}
       zoom={13}
       scrollWheelZoom={false}
-      style={{
-        height: '370px',
-        width: '100%',
-        maxWidth: '617px',
-        margin: '0 auto',
-      }}
+      className="map"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position}>
-        <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      {markers.map((marker) => (
+        <Marker
+          key={marker.id}
+          position={marker.position}
+          riseOnHover
+          opacity={
+            marker.id === selectedMarkerId || markers.length === 1 ? 1 : 0.5
+          }
+          eventHandlers={{
+            click: () => onMarkerClick?.(marker),
+          }}
+        >
+          {marker.name && <Popup>{marker.name}</Popup>}
+        </Marker>
+      ))}
     </MapContainer>
   );
 }
 
+export type { TMarker };
 export { Map };
-

@@ -1,94 +1,70 @@
+import { LatLngTuple } from 'leaflet';
+import { TComplication, TDate, TTopic } from '../types/types';
 
-const TOPICS = [
-  'Все квесты',
-  'Приключения',
-  'Ужасы',
-  'Мистика',
-  'Детектив',
-  'Sci-fi',
-] as const;
+const DateNamesMap: Record<TDate, string> = {
+  today: 'Сегодня',
+  tomorrow: 'Завтра',
+};
 
-const TOPICS_FOR_SORTING = [
+const TOPICS: TTopic[] = [
   'allQuests',
   'adventure',
   'horror',
   'mystic',
   'detective',
-  'sciFi',
-] as const;
+  'sci-fi',
+];
 
-const COMPLICATION = [
-  'Любой',
-  'Лёгкий',
-  'Средний',
-  'Сложный'
-] as const;
+const COMPLICATIONS: TComplication[] = ['any', 'easy', 'middle', 'hard'];
 
-const COMPLICATION_FOR_SORTING = [
-  'any',
-  'easy',
-  'middle',
-  'hard',
-] as const;
-
-const TopicMapForSorting = {
-  allQuests: 'allQuests',
-  adventure:'adventure',
-  horror: 'horror',
-  mystic: 'mystic',
-  detective: 'detective',
-  sciFi: 'sciFi',
-} as const;
-
-const TopicMap = {
+const TopicNamesMap: Record<TTopic, string> = {
   allQuests: 'Все квесты',
-  adventure:'Приключения',
+  adventure: 'Приключения',
   horror: 'Ужасы',
   mystic: 'Мистика',
   detective: 'Детектив',
-  sciFi: 'Sci-fi',
+  'sci-fi': 'Sci-fi',
 };
 
-const ComplicationMapForSorting = {
-  any: 'any',
-  easy: 'easy',
-  middle: 'middle',
-  hard: 'hard'
-} as const;
-
-const ComplicationMap = {
+const ComplicationNamesMap: Record<TComplication, string> = {
   any: 'Любой',
   easy: 'Лёгкий',
   middle: 'Средний',
-  hard: 'Сложный'
+  hard: 'Сложный',
 };
 
-const ContactPosition = [
-  59.969826,
-  30.308044
-];
-
+const ContactPosition: LatLngTuple = [59.969826, 30.308044];
 
 enum AppRoute {
   Main = '/',
   Quest = '/quest',
   MyQuests = '/my-quests',
   Login = '/login',
-  Booking ='/booking',
-  Reservation ='/reservation',
-  Contacts ='/contacts',
+  Booking = '/booking',
+  Reservation = '/reservation',
+  Contacts = '/contacts',
 }
 
 const enum AuthorizationStatus {
-  Auth= 'AUTH',
-  NoAuth= 'NO_AUTH',
-  UnKnown= 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  UnKnown = 'UNKNOWN',
 }
 
 const enum RequestStatus {
   Idle = 'Idle',
   Pending = 'Pending',
   Error = 'Error',
-  Success = 'Success'
+  Success = 'Success',
 }
-export { TOPICS, COMPLICATION, TOPICS_FOR_SORTING, COMPLICATION_FOR_SORTING, AppRoute, AuthorizationStatus, TopicMap, TopicMapForSorting, ComplicationMap,ComplicationMapForSorting, RequestStatus, ContactPosition};
+export {
+  TOPICS,
+  COMPLICATIONS,
+  AppRoute,
+  AuthorizationStatus,
+  DateNamesMap,
+  TopicNamesMap,
+  ComplicationNamesMap,
+  RequestStatus,
+  ContactPosition,
+};

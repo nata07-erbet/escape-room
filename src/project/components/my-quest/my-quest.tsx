@@ -1,23 +1,18 @@
+import { ComplicationNamesMap, DateNamesMap } from '../../const/const';
 import { TResponseBookedQuest } from '../../types/types';
 
-type MyQuest ={
+type MyQuest = {
   bookingQuest: TResponseBookedQuest;
-  onClickDeleteBooking:() => void;
-}
+  onClickDeleteBooking: () => void;
+};
 
-
-function MyQuest ({bookingQuest, onClickDeleteBooking}: MyQuest){
-
+function MyQuest({ bookingQuest, onClickDeleteBooking }: MyQuest) {
   return (
     <div className="quest-card" key={bookingQuest.id}>
       <div className="quest-card__img">
         <picture>
-          <source
-            type="image/webp"
-            srcSet={bookingQuest.quest.previewImgWebp}
-          />
+          <source type="image/webp" src={bookingQuest.quest.previewImgWebp} />
           <img
-            src={bookingQuest.quest.previewImg}
             srcSet={bookingQuest.quest.previewImg}
             width={344}
             height={232}
@@ -31,8 +26,9 @@ function MyQuest ({bookingQuest, onClickDeleteBooking}: MyQuest){
             {bookingQuest.quest.title}
           </a>
           <span className="quest-card__info">
-                [{bookingQuest.date},&nbsp;{bookingQuest.time} {bookingQuest.location.address}
-                      ]
+            {DateNamesMap[bookingQuest.date]},&nbsp;{bookingQuest.time}
+            <br />
+            {bookingQuest.location.address}
           </span>
         </div>
         <ul className="tags quest-card__tags">
@@ -46,7 +42,7 @@ function MyQuest ({bookingQuest, onClickDeleteBooking}: MyQuest){
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {bookingQuest.quest.level}
+            {ComplicationNamesMap[bookingQuest.quest.level]}
           </li>
         </ul>
         <button

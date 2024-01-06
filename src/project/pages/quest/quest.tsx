@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { TQuestFull } from '../../types/types';
-import { AppRoute } from '../../const/const';
+import {
+  AppRoute,
+  ComplicationNamesMap,
+  TopicNamesMap,
+} from '../../const/const';
 
 type QuestProp = {
   quest: TQuestFull;
-
 };
 
 function Quest({ quest }: QuestProp) {
@@ -19,17 +22,8 @@ function Quest({ quest }: QuestProp) {
       <main className="decorated-page quest-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
-            <source
-              type="image/webp"
-              srcSet={coverImg}
-            />
-            <img
-              src={coverImg}
-              srcSet={coverImg}
-              width={1366}
-              height={768}
-              alt={title}
-            />
+            <source type="image/webp" src={coverImg} />
+            <img srcSet={coverImg} width={1366} height={768} alt={title} />
           </picture>
         </div>
         <div className="container container--size-l">
@@ -38,7 +32,8 @@ function Quest({ quest }: QuestProp) {
               {title}
             </h1>
             <p className="subtitle quest-page__subtitle">
-              <span className="visually-hidden">Жанр:</span>{type}
+              <span className="visually-hidden">Жанр:</span>
+              {TopicNamesMap[type]}
             </p>
             <ul className="tags tags--size-l quest-page__tags">
               <li className="tags__item">
@@ -51,24 +46,21 @@ function Quest({ quest }: QuestProp) {
                 <svg width={14} height={14} aria-hidden="true">
                   <use xlinkHref="#icon-level" />
                 </svg>
-                {level}
+                {ComplicationNamesMap[level]}
               </li>
             </ul>
-            <p className="quest-page__description">
-              {description}
-            </p>
+            <p className="quest-page__description">{description}</p>
             <Link
               className="btn btn--accent btn--cta quest-page__btn"
               to={AppRoute.Booking} //вот тут точно косяк
             >
-            Забронировать
+              Забронировать
             </Link>
           </div>
         </div>
       </main>
       <Footer />
     </>
-
   );
 }
 

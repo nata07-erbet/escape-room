@@ -9,14 +9,13 @@ type MyQuestsProps = {
 };
 
 function MyQuests({ quests }: MyQuestsProps) {
-  const [ bookingQuests, setBookingQuests ] = useState(quests);
+  const [bookingQuests, setBookingQuests] = useState(quests);
 
-  const handleClickDeleteBooking = (id:string) => {
+  const handleClickDeleteBooking = (id: string) => {
     setBookingQuests((prevState) =>
       prevState.filter((quest) => quest.id !== id)
     );
   };
-
 
   return (
     <div className="wrapper">
@@ -29,8 +28,7 @@ function MyQuests({ quests }: MyQuestsProps) {
               srcSet="img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x"
             />
             <img
-              src="img/content/maniac/maniac-bg-size-m.jpg"
-              srcSet="img/content/maniac/maniac-bg-size-m@2x.jpg 2x"
+              srcSet="img/content/maniac/maniac-bg-size-m.jpg, img/content/maniac/maniac-bg-size-m@2x.jpg 2x"
               width={1366}
               height={1959}
               alt=""
@@ -48,7 +46,7 @@ function MyQuests({ quests }: MyQuestsProps) {
               <MyQuest
                 bookingQuest={bookingQuest}
                 key={bookingQuest.id}
-                onClickDeleteBooking ={
+                onClickDeleteBooking={
                   () => handleClickDeleteBooking(bookingQuest.id) //почему здесь вызов?
                 }
               />
@@ -58,9 +56,7 @@ function MyQuests({ quests }: MyQuestsProps) {
       </main>
       <Footer />
     </div>
-
   );
 }
 
 export { MyQuests };
-
