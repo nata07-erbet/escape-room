@@ -4,19 +4,18 @@ import 'leaflet/dist/leaflet.css';
 
 type TMarker = {
   id: string;
-  position: LatLngTuple;
   name?: string;
+  position: LatLngTuple;
 };
 
 type MapProps = {
-  markers: TMarker[];
-  selectMarkerId?: TMarker['id'];
-  onMarkerClick?: (marker: TMarker) => void;
   center: LatLngTuple;
-
+  markers: TMarker[];
+  selectedMarkerId?: TMarker['id'];
+  onMarkerClick?: (marker: TMarker) => void;
 };
 
-function Map ({ markers, center, selectMarkerId, onMarkerClick }): MapProps {
+function Map({ center, markers, selectedMarkerId, onMarkerClick }: MapProps) {
   return (
     <MapContainer
       center={center}
@@ -34,19 +33,18 @@ function Map ({ markers, center, selectMarkerId, onMarkerClick }): MapProps {
           position={marker.position}
           riseOnHover
           opacity={
-            marker.id === selectMarkerId || markers.length === 1 ? 1 : 0.5
+            marker.id === selectedMarkerId || markers.length === 1 ? 1 : 0.5
           }
           eventHandlers={{
-            click: () => onMarkerClick?.(marker)
+            click: () => onMarkerClick?.(marker),
           }}
         >
           {marker.name && <Popup>{marker.name}</Popup>}
         </Marker>
       ))}
-
     </MapContainer>
   );
-
 }
 
+export type { TMarker };
 export { Map };

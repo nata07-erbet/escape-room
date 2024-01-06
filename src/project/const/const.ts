@@ -1,4 +1,5 @@
 import { TTopic, TComplication, TDate } from '../types/types';
+import { LatLngTuple } from 'leaflet';
 
 const DateNamesMap: Record<TDate, string> = {
   today: 'Сегодня',
@@ -37,7 +38,7 @@ const ComplicationMamesMap: Record<TComplication, string> = {
   hard: 'Сложный',
 };
 
-const ContactPosition = [
+const ContactPosition: LatLngTuple = [
   59.969826,
   30.308044
 ];
