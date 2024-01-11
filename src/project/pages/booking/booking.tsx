@@ -1,3 +1,4 @@
+import { useState, FormEventHandler, useMemo } from 'react';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { TGetBookingQuest } from '../../types/types';
@@ -7,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { ErrorMessage } from '@hookform/error-message';
+import { Map, TMarker } from '../../components/map/map';
 
 type BookingProps = {
   places: TGetBookingQuest ;
@@ -16,9 +18,31 @@ type BookingProps = {
 function Booking({ places, quest }: BookingProps) {
   const navigate = useNavigate();
 
+  const [currentPlace, setCurrentPlace] = useState(places[0]);
+  const { location, id, slots } = currentPlace;
   const { title, peopleMinMax } = quest;
-  const { location, slots } = places[0];
   const { today , tomorrow } = slots;
+
+  const markers: TMarker[] = useMemo(
+    () => (
+      places.map((place) => ({
+        id: place.id,
+        position: place.location.coords,
+      }))
+    ),
+    [places]
+  );
+
+  const handleMarkerClick = (marker:TMarker) => {
+    const selectedPlace = places.find((place) => place.id === marker.id);
+    if(!selectedPlace) {
+      // eslint-disable-next-line no-console
+      console.warn(`Icorrect marker${JSON.stringify(marker)}`);
+      return false; //зачем возвращать?
+    }
+    setCurrentPlace(selectedPlace);
+  };
+
 
   const {
     register,
@@ -64,18 +88,24 @@ function Booking({ places, quest }: BookingProps) {
             </p>
           </div>
           <div className="page-content__item">
-            <div className="booking-map">
-              <div className="map">
-                <div className="map__container" />
-              </div>
+            <div className="booking-map" style={{border: '2px solid red'}}>
+              <Map //хз?
+                center={location.coords}
+                markers={markers}
+                selectedMarkerId={id}
+                onMarkerClick={handleMarkerClick}
+              >
+              </Map>
+
               <p className="booking-map__address">{location.address}</p>
             </div>
           </div>
+
           <form
             className="booking-form"
             action="https://echo.htmlacademy.ru/"
             method="post"
-            onSubmit={handleSubmit(onSubmit, onError)}
+            onSubmit={handleSubmit(onSubmit, onError) as FormEventHandler} // зачем здесь сужаем тип, почему нельзя написать выше?
           >
             <fieldset className="booking-form__section">
               <legend className="visually-hidden">Выбор даты и времени</legend>
@@ -176,15 +206,15 @@ function Booking({ places, quest }: BookingProps) {
                 <input
                   type="number"
                   id="person"
-                  {...register('person', {
-                    required : 'Введите количество участников',
-                    pattern: {
-                      value: new RegExp(
-                        `[${peopleMinMax[0]}-${peopleMinMax[1]}}]`
-                      ),
-                      message: `Количество участников должно быть от ${peopleMinMax[0]} до ${peopleMinMax[1]}`,
-                    }
-                  })}
+                  // {...register('person', {
+                  //   required : 'Введите количество участников',
+                  //   pattern: {
+                  //     value: new RegExp(
+                  //       `[${peopleMinMax[0]}-${peopleMinMax[1]}}]`
+                  //     ),
+                  //     message: `Количество участников должно быть от ${peopleMinMax[0]} до ${peopleMinMax[1]}`,
+                  //   }
+                  // })}
                   placeholder="Количество участников"
                 />
                 <ErrorMessage
