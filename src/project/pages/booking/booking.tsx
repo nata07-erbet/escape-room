@@ -86,7 +86,6 @@ function Booking({ places, quest }: BookingProps) {
           </div>
           <div className="page-content__item">
             <div className="booking-map">
-              //
               <Map
                 center={location.coords}
                 markers={markers}
