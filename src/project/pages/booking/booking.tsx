@@ -1,4 +1,3 @@
-import { useState, FormEventHandler, useMemo } from 'react';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { TGetBookingQuest } from '../../types/types';
@@ -8,41 +7,39 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { ErrorMessage } from '@hookform/error-message';
+import { FormEventHandler, useMemo, useState } from 'react';
 import { Map, TMarker } from '../../components/map/map';
 
 type BookingProps = {
-  places: TGetBookingQuest ;
+  places: TGetBookingQuest;
   quest: TQuestFull;
-}
+};
 
 function Booking({ places, quest }: BookingProps) {
   const navigate = useNavigate();
-
   const [currentPlace, setCurrentPlace] = useState(places[0]);
-  const { location, id, slots } = currentPlace;
   const { title, peopleMinMax } = quest;
-  const { today , tomorrow } = slots;
+  const { id, location, slots } = currentPlace;
+  const { today, tomorrow } = slots;
 
   const markers: TMarker[] = useMemo(
-    () => (
+    () =>
       places.map((place) => ({
         id: place.id,
         position: place.location.coords,
-      }))
-    ),
+      })),
     [places]
   );
 
-  const handleMarkerClick = (marker:TMarker) => {
+  const handleMarkerClick = (marker: TMarker) => {
     const selectedPlace = places.find((place) => place.id === marker.id);
-    if(!selectedPlace) {
+    if (!selectedPlace) {
       // eslint-disable-next-line no-console
-      console.warn(`Icorrect marker${JSON.stringify(marker)}`);
-      return false; //зачем возвращать?
+      console.warn(`Incorrect marker data: ${JSON.stringify(marker)}`);
+      return false;
     }
     setCurrentPlace(selectedPlace);
   };
-
 
   const {
     register,
@@ -88,31 +85,28 @@ function Booking({ places, quest }: BookingProps) {
             </p>
           </div>
           <div className="page-content__item">
-            <div className="booking-map" style={{border: '2px solid red'}}>
-              <Map //хз?
+            <div className="booking-map">
+              <Map
                 center={location.coords}
                 markers={markers}
                 selectedMarkerId={id}
                 onMarkerClick={handleMarkerClick}
-              >
-              </Map>
-
+              />
               <p className="booking-map__address">{location.address}</p>
             </div>
           </div>
-
           <form
             className="booking-form"
             action="https://echo.htmlacademy.ru/"
             method="post"
-            onSubmit={handleSubmit(onSubmit, onError) as FormEventHandler} // зачем здесь сужаем тип, почему нельзя написать выше?
+            onSubmit={handleSubmit(onSubmit, onError) as FormEventHandler}
           >
             <fieldset className="booking-form__section">
               <legend className="visually-hidden">Выбор даты и времени</legend>
               <fieldset className="booking-form__date-section">
                 <legend className="booking-form__date-title">Сегодня</legend>
                 <div className="booking-form__date-inner-wrapper">
-                  {today.map((item) =>(
+                  {today.map((item) => (
                     <label
                       className="custom-radio booking-form__date"
                       key={item.time}
@@ -166,7 +160,7 @@ function Booking({ places, quest }: BookingProps) {
                     required: 'Please enter your name',
                     pattern: {
                       value: /^\w{1,15}$/,
-                      message: 'Name must contain from 1 to 15 letters'
+                      message: 'Name must contain from 1 to 15 letters',
                     },
                   })}
                   placeholder="Имя"
@@ -184,12 +178,12 @@ function Booking({ places, quest }: BookingProps) {
                 <input
                   type="tel"
                   id="tel"
-                  {...register('tel',{
+                  {...register('tel', {
                     required: 'Укажите контактный телефон',
                     pattern: {
                       value: /^(\+?7|8)?9\d{9}$/,
                       message: 'Некорректный телефон',
-                    }
+                    },
                   })}
                   placeholder="Телефон"
                 />
@@ -206,15 +200,15 @@ function Booking({ places, quest }: BookingProps) {
                 <input
                   type="number"
                   id="person"
-                  // {...register('person', {
-                  //   required : 'Введите количество участников',
-                  //   pattern: {
-                  //     value: new RegExp(
-                  //       `[${peopleMinMax[0]}-${peopleMinMax[1]}}]`
-                  //     ),
-                  //     message: `Количество участников должно быть от ${peopleMinMax[0]} до ${peopleMinMax[1]}`,
-                  //   }
-                  // })}
+                  {...register('person', {
+                    required: 'Введите количество участников',
+                    pattern: {
+                      value: new RegExp(
+                        `[${peopleMinMax[0]}-${peopleMinMax[1]}}]`
+                      ),
+                      message: `Количество участников должно быть от ${peopleMinMax[0]} до ${peopleMinMax[1]}`,
+                    },
+                  })}
                   placeholder="Количество участников"
                 />
                 <ErrorMessage
@@ -238,7 +232,7 @@ function Booking({ places, quest }: BookingProps) {
                   </svg>
                 </span>
                 <span className="custom-checkbox__label">
-            Со&nbsp;мной будут дети
+                  Со&nbsp;мной будут дети
                 </span>
               </label>
             </fieldset>
@@ -268,7 +262,7 @@ function Booking({ places, quest }: BookingProps) {
                 >
                   правилами обработки персональных данных
                 </Link>
-                  &nbsp;и пользовательским соглашением
+                &nbsp;и пользовательским соглашением
               </span>
             </label>
           </form>
