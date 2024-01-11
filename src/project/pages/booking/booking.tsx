@@ -19,7 +19,7 @@ function Booking({ places, quest }: BookingProps) {
   const navigate = useNavigate();
   const [currentPlace, setCurrentPlace] = useState(places[0]);
   const { title, peopleMinMax } = quest;
-  const { id, location, slots } = currentPlace;
+  const { location, slots } = currentPlace;
   const { today, tomorrow } = slots;
 
   const markers: TMarker[] = useMemo(
@@ -32,7 +32,7 @@ function Booking({ places, quest }: BookingProps) {
   );
 
   const handleMarkerClick = (marker: TMarker) => {
-    const selectedPlace = places.find((place) => place.id === marker.id);
+    const selectedPlace = places.find((el) => el.id === marker.id);
     if (!selectedPlace) {
       // eslint-disable-next-line no-console
       console.warn(`Incorrect marker data: ${JSON.stringify(marker)}`);
@@ -89,7 +89,7 @@ function Booking({ places, quest }: BookingProps) {
               <Map
                 center={location.coords}
                 markers={markers}
-                selectedMarkerId={id}
+                selectedMarkerId={currentPlace.id}
                 onMarkerClick={handleMarkerClick}
               />
               <p className="booking-map__address">{location.address}</p>

@@ -3,27 +3,22 @@ import { NavLink } from 'react-router-dom';
 import { TQuest } from '../../types/types';
 import {
   AppRoute,
-  ComplicationMamesMap,
+  ComplicationNamesMap,
   TopicNamesMap,
 } from '../../const/const';
 
-type TCard ={
+type TCard = {
   quest: TQuest;
-}
-
+};
 
 function Card({ quest }: TCard) {
   const { id, title, level, previewImg, peopleMinMax, type } = quest;
-
 
   return (
     <div className="quest-card">
       <div className="quest-card__img">
         <picture>
-          <source
-            type="image/webp"
-            srcSet={previewImg}
-          />
+          <source type="image/webp" srcSet={previewImg} />
           <img
             src={previewImg}
             srcSet="img/content/crypt/crypt-size-s@2x.jpg 2x"
@@ -50,7 +45,7 @@ function Card({ quest }: TCard) {
             <svg width={14} height={14} aria-hidden="true">
               <use xlinkHref="#icon-level" />
             </svg>
-            {ComplicationMamesMap[level]}
+            {ComplicationNamesMap[level]}
           </li>
         </ul>
       </div>

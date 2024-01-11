@@ -1,4 +1,4 @@
-import { TopicNamesMap, ComplicationMamesMap } from '../../const/const';
+import { TopicNamesMap, ComplicationNamesMap } from '../../const/const';
 import { TTopic, TComplication } from '../../types/types';
 
 type FormFilters = {
@@ -58,7 +58,7 @@ function FormFilters({
       <fieldset className="filter__section">
         <legend className="visually-hidden">Сложность</legend>
         <ul className="filter__list">
-          {Object.entries(ComplicationMamesMap).map(([key, value]) => (
+          {Object.entries(ComplicationNamesMap).map(([key, value]) => (
             <li className="filter__item" key={key}>
               <input
                 type="radio"

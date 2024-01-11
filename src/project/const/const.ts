@@ -1,5 +1,5 @@
-import { TTopic, TComplication, TDate } from '../types/types';
 import { LatLngTuple } from 'leaflet';
+import { TComplication, TDate, TTopic } from '../types/types';
 
 const DateNamesMap: Record<TDate, string> = {
   today: 'Сегодня',
@@ -15,65 +15,56 @@ const TOPICS: TTopic[] = [
   'sci-fi',
 ];
 
-const TopicNamesMap: Record <TTopic, string > = {
+const COMPLICATIONS: TComplication[] = ['any', 'easy', 'middle', 'hard'];
+
+const TopicNamesMap: Record<TTopic, string> = {
   allQuests: 'Все квесты',
-  adventure:  'Приключения',
+  adventure: 'Приключения',
   horror: 'Ужасы',
-  mystic: 'Мистика' ,
-  detective:  'Детектив',
-  'sci-fi':  'Sci-fi',
+  mystic: 'Мистика',
+  detective: 'Детектив',
+  'sci-fi': 'Sci-fi',
 };
 
-const COMPLICATIONS: TComplication[] = [
-  'any',
-  'easy',
-  'medium',
-  'hard'
-];
-
-const ComplicationMamesMap: Record<TComplication, string> = {
+const ComplicationNamesMap: Record<TComplication, string> = {
   any: 'Любой',
   easy: 'Лёгкий',
-  medium: 'Средний' ,
+  middle: 'Средний',
   hard: 'Сложный',
 };
 
-const ContactPosition: LatLngTuple = [
-  59.969826,
-  30.308044
-];
-
+const ContactPosition: LatLngTuple = [59.969826, 30.308044];
 
 enum AppRoute {
   Main = '/',
   Quest = '/quest',
   MyQuests = '/my-quests',
   Login = '/login',
-  Booking ='/booking',
-  Reservation ='/reservation',
-  Contacts ='/contacts',
+  Booking = '/booking',
+  Reservation = '/reservation',
+  Contacts = '/contacts',
 }
 
 const enum AuthorizationStatus {
-  Auth= 'AUTH',
-  NoAuth= 'NO_AUTH',
-  UnKnown= 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  UnKnown = 'UNKNOWN',
 }
 
 const enum RequestStatus {
   Idle = 'Idle',
   Pending = 'Pending',
   Error = 'Error',
-  Success = 'Success'
+  Success = 'Success',
 }
 export {
-  DateNamesMap,
   TOPICS,
-  TopicNamesMap,
   COMPLICATIONS,
-  ComplicationMamesMap,
   AppRoute,
   AuthorizationStatus,
+  DateNamesMap,
+  TopicNamesMap,
+  ComplicationNamesMap,
   RequestStatus,
-  ContactPosition
+  ContactPosition,
 };

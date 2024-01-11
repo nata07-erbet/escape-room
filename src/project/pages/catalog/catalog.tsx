@@ -8,24 +8,27 @@ import { useState } from 'react';
 
 type CatalogProps = {
   quests: TQuest[];
-}
+};
 
 function Catalog({ quests }: CatalogProps) {
   const [activeFilterTopic, setFilterTopic] = useState<TTopic>('allQuests');
-  const [activeFilterComplication, setFilterComplication] = useState<TComplication>('any');
+  const [activeFilterComplication, setFilterComplication] =
+    useState<TComplication>('any');
 
-  const getFilterQuestsByTopic = (filter: TTopic) =>
+  const getFilteredQuestsByTopic = (filter: TTopic) =>
     filterByTopic[filter](quests);
 
-  let filteredQuestsByTopic = getFilterQuestsByTopic(activeFilterTopic);
+  let filteredQuestsByTopic = getFilteredQuestsByTopic(activeFilterTopic);
 
   const getFilteredQuestsByComplication = (filter: TComplication) =>
     filterByComplication[filter](filteredQuestsByTopic);
 
-  let filteredQuestsByComplication = getFilteredQuestsByComplication(activeFilterComplication);
+  let filteredQuestsByComplication = getFilteredQuestsByComplication(
+    activeFilterComplication
+  );
 
   const handleFilterTopic = (filter: TTopic) => {
-    filteredQuestsByTopic = getFilterQuestsByTopic(filter);
+    filteredQuestsByTopic = getFilteredQuestsByTopic(filter);
     setFilterTopic(filter);
   };
 
@@ -41,27 +44,24 @@ function Catalog({ quests }: CatalogProps) {
         <div className="container">
           <div className="page-content__title-wrapper">
             <h1 className="subtitle page-content__subtitle">
-        квесты в Санкт-Петербурге
+              квесты в Санкт-Петербурге
             </h1>
             <h2 className="title title--size-m page-content__title">
-        Выберите тематику
+              Выберите тематику
             </h2>
           </div>
           <div className="page-content__item">
             <FormFilters
-              activeFilterTopic ={activeFilterTopic}
-              onClickTopic ={handleFilterTopic}
+              activeFilterTopic={activeFilterTopic}
+              onClickTopic={handleFilterTopic}
               activeFilterComplication={activeFilterComplication}
-              onClickComplication = {handleFilterComplication}
+              onClickComplication={handleFilterComplication}
             />
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
           <div className="cards-grid">
             {filteredQuestsByComplication.map((quest) => (
-              <Card
-                quest={quest}
-                key={quest.id}
-              />
+              <Card quest={quest} key={quest.id} />
             ))}
           </div>
         </div>

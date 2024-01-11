@@ -1,26 +1,24 @@
 import { faker } from '@faker-js/faker';
 
 import { TOPICS, COMPLICATIONS } from '../const/const';
-
 import {
+  TGetBookingQuest,
+  TLocation,
+  TPostBookingQuest,
   TQuest,
   TQuestFull,
-  TSchedule,
-  TPostBookingQuest,
-  TGetBookingQuest,
-  TResponseBookedQuest,
-  TLocation,
   TQuestPlace,
+  TResponseBookedQuest,
 } from '../types/types';
 
 const CARDS_COUNT = faker.number.int({ min: 25, max: 35 });
 
-const getMock = ():TQuest => ({
+const getMock = (): TQuest => ({
   id: faker.string.uuid(),
   title: faker.lorem.word(),
   previewImg: faker.image.urlLoremFlickr(),
-  previewImgWebp:faker.image.urlPicsumPhotos(),
-  level:faker.helpers.arrayElement(
+  previewImgWebp: faker.image.urlPicsumPhotos(),
+  level: faker.helpers.arrayElement(
     COMPLICATIONS.filter((el): el is TQuest['level'] => el !== 'any')
   ),
   type: faker.helpers.arrayElement(
@@ -29,9 +27,8 @@ const getMock = ():TQuest => ({
   peopleMinMax: faker.helpers.arrayElements([1, 2, 3, 4, 5], 2).sort(),
 });
 
-const getFullMock = ():TQuestFull => ({
+const getFullMock = (): TQuestFull => ({
   ...getMock(),
-  peopleMinMax: faker.helpers.arrayElements([1, 2, 3, 4, 5], 2),
   description: faker.lorem.sentences(2, '\n'),
   coverImg: faker.image.urlLoremFlickr({ category: 'horror' }),
   coverImgWebp: faker.image.urlLoremFlickr({ category: 'nature' }),
@@ -42,30 +39,28 @@ const getLocation = (): TLocation => ({
   coords: [faker.location.latitude(), faker.location.longitude()],
 });
 
-const getSchedule = (): TSchedule => ({
-  time:faker.date.anytime().toLocaleTimeString() ,
+const getSchedule = () => ({
+  time: faker.date.anytime().toLocaleTimeString(),
   isAvailable: faker.datatype.boolean(),
 });
 
-const getQuestPlace = ():TQuestPlace => (
-  {
-    id: faker.string.uuid(),
-    location: getLocation(),
-    slots: {
-      today: Array.from(
-        { length: faker.number.int({ min: 1, max: 5}) },
-        getSchedule
-      ),
-      tomorrow: Array.from(
-        { length: faker.number.int({ min: 1, max: 5 }) },
-        getSchedule
-      ),
-    }
-  });
+const getQuestPlace = (): TQuestPlace => ({
+  id: faker.string.uuid(),
+  location: getLocation(),
+  slots: {
+    today: Array.from(
+      { length: faker.number.int({ min: 1, max: 5 }) },
+      getSchedule
+    ),
+    tomorrow: Array.from(
+      { length: faker.number.int({ min: 1, max: 5 }) },
+      getSchedule
+    ),
+  },
+});
 
-
-const getBookingQuest = ():TGetBookingQuest =>
-  Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, getQuestPlace);
+const getBookingQuest = (): TGetBookingQuest =>
+  Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, getQuestPlace);
 
 const getMocks = () => Array.from({ length: CARDS_COUNT }, getMock);
 
@@ -76,7 +71,7 @@ const getPostBookingQuest = (): TPostBookingQuest => ({
   phone: faker.number.int({ min: 89154, max: 89999 }).toString(),
   withChildren: faker.datatype.boolean(),
   peopleCount: faker.number.int({ min: 1, max: 5 }),
-  placeId: faker.location.streetAddress()
+  placeId: faker.location.streetAddress(),
 });
 
 const getResponseBookedQuest = (): TResponseBookedQuest => ({
@@ -89,9 +84,8 @@ const getResponseBookedQuest = (): TResponseBookedQuest => ({
   id: faker.string.uuid(),
   location: {
     address: faker.location.streetAddress(),
-    coords: [
-      faker.location.latitude(), faker.location.longitude()
-    ]},
+    coords: [faker.location.latitude(), faker.location.longitude()],
+  },
   quest: getMock(),
 });
 
@@ -99,14 +93,13 @@ const bookingQuest = getPostBookingQuest();
 
 const bookingQuests = Array.from(
   { length: faker.number.int({ min: 1, max: 5 }) },
-  getResponseBookedQuest,
+  getResponseBookedQuest
 );
 
 const bookingQuestsForDelete = Array.from(
   { length: faker.number.int({ min: 1, max: 5 }) },
-  getResponseBookedQuest,
+  getResponseBookedQuest
 );
-
 
 const mock = getFullMock();
 const mocks = getMocks();
@@ -122,7 +115,5 @@ export {
   bookingQuests,
   bookingQuestsForDelete,
   CARDS_COUNT,
-  sortQuestTest
+  sortQuestTest,
 };
-
-
