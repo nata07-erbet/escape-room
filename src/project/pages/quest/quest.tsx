@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
-import { TQuestFull } from '../../types/types';
+import { TQuestFull } from '../../types/user.types';
 import { AppRoute } from '../../const/const';
 
 type QuestProp = {

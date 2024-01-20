@@ -9,7 +9,7 @@ import {
   TQuestFull,
   TQuestPlace,
   TResponseBookedQuest,
-} from '../types/types';
+} from '../types/user.types';
 
 const CARDS_COUNT = faker.number.int({ min: 25, max: 35 });
 

@@ -1,5 +1,5 @@
 import { LatLngTuple } from 'leaflet';
-import { TComplication, TDate, TTopic } from '../types/types';
+import { TComplication, TDate, TTopic } from '../types/user.types';
 
 const DateNamesMap: Record<TDate, string> = {
   today: 'Сегодня',

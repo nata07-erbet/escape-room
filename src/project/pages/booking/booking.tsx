@@ -1,7 +1,7 @@
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
-import { TGetBookingQuest } from '../../types/types';
-import { TQuestFull } from '../../types/types';
+import { TGetBookingQuest } from '../../types/user.types';
+import { TQuestFull } from '../../types/user.types';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';

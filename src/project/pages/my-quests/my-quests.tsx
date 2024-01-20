@@ -1,7 +1,7 @@
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { MyQuest } from '../../components/my-quest/my-quest';
-import { TResponseBookedQuest } from '../../types/types';
+import { TResponseBookedQuest } from '../../types/user.types';
 import { useState } from 'react';
 
 type MyQuestsProps = {

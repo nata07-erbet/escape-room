@@ -1,5 +1,5 @@
 import { TopicNamesMap, ComplicationNamesMap } from '../../const/const';
-import { TTopic, TComplication } from '../../types/types';
+import { TTopic, TComplication } from '../../types/user.types';
 
 type FormFilters = {
   onClickTopic: (filterTopic: TTopic) => void;

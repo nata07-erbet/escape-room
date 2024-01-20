@@ -1,5 +1,5 @@
-import { TQuest } from '../types/types';
-import { TTopic, TComplication } from '../types/types';
+import { TQuest } from '../types/user.types';
+import { TTopic, TComplication } from '../types/user.types';
 
 
 const filterByTopic: Record<TTopic, (quests:TQuest[]) => TQuest[]> = {

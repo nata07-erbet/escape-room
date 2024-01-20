@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { TQuest } from '../../types/types';
+import { TQuest } from '../../types/user.types';
 import {
   AppRoute,
   ComplicationNamesMap,

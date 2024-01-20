@@ -2,7 +2,7 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Card } from '../../components/card/card';
 import { FormFilters } from '../../components/form-filters/form-filters';
-import { TQuest, TTopic, TComplication } from '../../types/types';
+import { TQuest, TTopic, TComplication } from '../../types/user.types';
 import { filterByTopic, filterByComplication } from '../../utils/filters';
 import { useState } from 'react';
 

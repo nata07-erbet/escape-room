@@ -1,5 +1,5 @@
 import { ComplicationNamesMap, DateNamesMap } from '../../const/const';
-import { TResponseBookedQuest } from '../../types/types';
+import { TResponseBookedQuest } from '../../types/user.types';
 
 type MyQuest = {
   bookingQuest: TResponseBookedQuest;

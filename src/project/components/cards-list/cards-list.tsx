@@ -1,4 +1,4 @@
-import { TQuest } from '../../types/types';
+import { TQuest } from '../../types/user.types';
 
 import { Card } from '../card/card';
 
