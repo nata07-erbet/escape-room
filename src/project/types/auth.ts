@@ -3,5 +3,5 @@ type UserStatus ={
   token: string;
 }
 
-export { UserStatus };
+export type { UserStatus };
 

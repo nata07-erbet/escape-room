@@ -30,10 +30,10 @@ const initalState: {
   logoutServer: null,
 };
 
-const reducer = createReducer(initalState,(builder) => builder
-  .addCase(createAct, (state) => {
-    state = state.place;
-  }));
-
+const reducer = createReducer(initalState, (builder) => {
+  builder.addCase(createAct, (state) => {
+    state.quests = quests;
+  });
+});
 
 export { reducer };

@@ -15,7 +15,7 @@ const TOPICS: TTopic[] = [
   'sci-fi',
 ];
 
-const COMPLICATIONS: TComplication[] = ['any', 'easy', 'middle', 'hard'];
+const COMPLICATIONS: TComplication[] = ['any', 'easy', 'medium', 'hard'];
 
 const TopicNamesMap: Record<TTopic, string> = {
   allQuests: 'Все квесты',
@@ -29,7 +29,7 @@ const TopicNamesMap: Record<TTopic, string> = {
 const ComplicationNamesMap: Record<TComplication, string> = {
   any: 'Любой',
   easy: 'Лёгкий',
-  middle: 'Средний',
+  medium: 'Средний',
   hard: 'Сложный',
 };
 
@@ -57,6 +57,19 @@ const enum RequestStatus {
   Error = 'Error',
   Success = 'Success',
 }
+
+const enum NameSpace {
+  Quests = 'Quests',
+  Quest = 'Quest',
+  BookingQuests = 'BookingQuests',
+  Place = 'Place',
+  InfoUserBooked = 'InfoUserBooked',
+  UserAuthStatus = 'User',
+  LoginServer = 'LoginServer',
+  LogoutServer = 'LogoutServer',
+}
+
+
 export {
   TOPICS,
   COMPLICATIONS,
@@ -67,4 +80,5 @@ export {
   ComplicationNamesMap,
   RequestStatus,
   ContactPosition,
+  NameSpace
 };
