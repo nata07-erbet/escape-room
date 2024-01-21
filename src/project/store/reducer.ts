@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-
 import {
   fetchQuests,
   fetchQuest,
@@ -33,7 +32,7 @@ const initalState: {
 
 } = {
   quests: [],
-  quest: null,
+  quest:  null,
   bookingQuests: [],
   place : null,
   infoUserBooked: [],
