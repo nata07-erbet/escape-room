@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { TQuestFull } from '../../types/user.types';
 import { AppRoute } from '../../const/const';
+import { useAppSelector } from '../../hooks';
 
 type QuestProp = {
   quest: TQuestFull;
@@ -12,6 +13,7 @@ type QuestProp = {
 
 function Quest({ quest }: QuestProp) {
   const { title, type, peopleMinMax, level, description, coverImg } = quest;
+  // quest = useAppSelector((state) => state.offer);
 
   return (
     <>

@@ -48,7 +48,7 @@ const reducer = createReducer(initalState, (builder) => {
       state.quests = quests;
     })
     .addCase(fetchQuest, (state, action) => {
-      state.quest = quests.find((quest) => quest.id  === action.payload);
+      state.quest = quests.find((quest) => quest.id === action.payload);
     })
     .addCase(fetchBookingQuests, (state) => {
       state.bookingQuests = bookingQuests;
