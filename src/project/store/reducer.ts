@@ -19,6 +19,7 @@ import type {
 } from '../types/user.types';
 
 import type { UserStatus } from '../types/auth';
+import { mocks, mock, } from '../mocks/mocks';
 
 const initalState: {
   quests: TQuest[];
@@ -31,8 +32,8 @@ const initalState: {
   logoutServer: UserStatus | null;
 
 } = {
-  quests: [],
-  quest:  null,
+  quests: mocks,
+  quest: mock,
   bookingQuests: [],
   place : null,
   infoUserBooked: [],
@@ -66,7 +67,7 @@ const reducer = createReducer(initalState, (builder) => {
     })
     .addCase(logout, (state) => {
       state.logoutServer = logoutServer;
-    })
+    });
 });
 
 export { reducer };
